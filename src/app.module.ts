@@ -1,6 +1,8 @@
+import { CulturaModule } from './cultura/cultura.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CulturaEntity } from './cultura/cultura.entity';
 import { PaisModule } from './pais/pais.module';
 import { RestauranteModule } from './restaurante/restaurante.module';
 import { PaisEntity } from './pais/pais.entity';
@@ -9,6 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    CulturaModule,
     PaisModule,
     RestauranteModule,
     TypeOrmModule.forRoot({
@@ -18,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'museumuser',
       password: '123456',
       database: 'museumsdb',
-      entities: [PaisEntity, RestauranteEntity],
+      entities: [CulturaEntity, PaisEntity, RestauranteEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
@@ -27,4 +30,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

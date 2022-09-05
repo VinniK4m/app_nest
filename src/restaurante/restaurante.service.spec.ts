@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RestauranteService } from './restaurante.service';
 import {Repository} from "typeorm";
 import {RestauranteEntity} from "../restaurante/restaurante.entity";
-import {TypeOrmTestingConfig} from "../shared/testing-utils/TypeOrmTestingConfig";
+import {TypeOrmTestingConfig} from "../shared/testing-utils/typeorm-testing-config";
 import {getRepositoryToken} from "@nestjs/typeorm";
 import {faker} from "@faker-js/faker";
 import {PaisEntity} from "../pais/pais.entity";
