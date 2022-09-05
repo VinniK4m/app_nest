@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CulturaEntity } from '../../cultura/cultura.entity';
+import {PaisEntity} from "../../pais/pais.entity";
+import {RestauranteEntity} from "../../restaurante/restaurante.entity";
 import {ProductoEntity} from "../../producto/producto.entity";
 import {CategoriaEntity} from "../../categoria/categoria.entity";
 
@@ -8,9 +11,9 @@ export const TypeOrmTestingConfig = () => [
     type: 'sqlite',
     database: ':memory:',
     dropSchema: true,
-    entities: [ProductoEntity, CategoriaEntity],
+    entities: [ProductoEntity, CategoriaEntity,CulturaEntity, PaisEntity, RestauranteEntity],
     synchronize: true,
-    keepConnectionAlive: true 
+    keepConnectionAlive: true
   }),
-  TypeOrmModule.forFeature([ProductoEntity, CategoriaEntity]),
+  TypeOrmModule.forFeature([ProductoEntity, CategoriaEntity,CulturaEntity, PaisEntity, RestauranteEntity]),
 ];
