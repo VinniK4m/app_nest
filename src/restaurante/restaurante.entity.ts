@@ -5,15 +5,21 @@ import {PaisEntity} from "../pais/pais.entity";
 
 @Entity()
 export class RestauranteEntity {
-    @PrimaryGeneratedColumn('uuid')
-    codigo: string;
+    @PrimaryGeneratedColumn()
+    codigo: number;
 
     @Column()
     nombre: string;
 
     @Column()
-    capital: string;
+    nombreCiudad: string;
 
+    @ManyToOne(
+        () => PaisEntity,
+        (pais) => {
+            return pais.restaurantes;
+        },
+    )
     pais: PaisEntity
 
 

@@ -5,8 +5,8 @@ import {RestauranteEntity} from "../restaurante/restaurante.entity";
 
 @Entity()
 export class PaisEntity {
-    @PrimaryGeneratedColumn('uuid')
-    codigo: string;
+    @PrimaryGeneratedColumn()
+    codigo: number;
 
     @Column()
     nombre: string;
@@ -15,7 +15,7 @@ export class PaisEntity {
     capital: string;
 
     @Column()
-    bandera: Date;
+    bandera: string ;
 
     @OneToMany(() => RestauranteEntity, (restaurante) => restaurante.pais)
     restaurantes: RestauranteEntity[];
