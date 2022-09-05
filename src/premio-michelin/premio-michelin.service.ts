@@ -12,11 +12,11 @@ export class PremioMichelinService {
     ){}
 
     async findAll(): Promise<PremioMichelinEntity[]> {
-        return await this.premioMichelinRepository.find({ relations: ["artworks", "exhibitions"] });
+        return await this.premioMichelinRepository.find({ relations: [] });
     }
 
     async findOne(codigo: number): Promise<PremioMichelinEntity> {
-        const premioMichelin: PremioMichelinEntity = await this.premioMichelinRepository.findOne({where: {codigo}, relations: ["restaurantes"] } );
+        const premioMichelin: PremioMichelinEntity = await this.premioMichelinRepository.findOne({where: {codigo}, relations: [] } );
         if (!premioMichelin)
           throw new BusinessLogicException("El premio michelin con este codigo no fue encontrado", BusinessError.NOT_FOUND);
    

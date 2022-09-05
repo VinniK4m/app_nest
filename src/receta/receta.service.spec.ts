@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { TypeOrmTestingConfig } from 'src/shared/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { Repository } from 'typeorm/repository/Repository';
 import { RecetaEntity } from './receta.entity';
 import { RecetaService } from './receta.service';
@@ -24,16 +24,16 @@ describe('RecetaService', () => {
   });
   const seedDatabase = async () => {
     repository.clear();
-    recetasList: [];
+    recetasList = [];
     for(let i = 0; i < 5; i++){
-        const receta: RecetaEntity = await repository.save({
+      const receta: RecetaEntity = await repository.save({
           nombre: faker.lorem.sentence(),
           descripcion: faker.lorem.paragraph(),
           urlFoto: faker.image.imageUrl(),
           procesoPrep: faker.lorem.paragraph(),
           urlVideo: faker.image.imageUrl()
-        })
-          recetasList.push(receta);
+        });
+      recetasList.push(receta);
     }
   }
 

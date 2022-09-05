@@ -24,11 +24,10 @@ describe('PremioMichelinService', () => {
   });
   const seedDatabase = async () => {
     repository.clear();
-    premiosMichelinList: [];
+    premiosMichelinList = [];
     for(let i = 0; i < 5; i++){
-        const premio: PremioMichelinEntity = await repository.save({
-          fechaConsecucion: faker.date.recent()})
-          premiosMichelinList.push(premio);
+      const premio: PremioMichelinEntity = await repository.save({fechaConsecucion: faker.date.recent()});
+      premiosMichelinList.push(premio);
     }
   }
 

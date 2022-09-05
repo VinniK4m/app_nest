@@ -12,11 +12,11 @@ export class RecetaService {
     ){}
 
     async findAll(): Promise<RecetaEntity[]> {
-        return await this.recetaRepository.find({ relations: ["artworks", "exhibitions"] });
+        return await this.recetaRepository.find({ relations: [] });
     }
 
     async findOne(codigo: number): Promise<RecetaEntity> {
-        const receta: RecetaEntity = await this.recetaRepository.findOne({where: {codigo}, relations: ["culturas"] } );
+        const receta: RecetaEntity = await this.recetaRepository.findOne({where: {codigo}, relations: [] } );
         if (!receta)
           throw new BusinessLogicException("La receta con este codigo no fue encontrado", BusinessError.NOT_FOUND);
    
