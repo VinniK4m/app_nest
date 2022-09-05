@@ -2,8 +2,8 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class CulturaEntity {
-    @PrimaryGeneratedColumn('uuid')
-    codigo: string;
+    @PrimaryGeneratedColumn()
+    codigo: number;
     
     @Column()
     nombre: string;

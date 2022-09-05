@@ -28,7 +28,6 @@ describe('CulturaService', () => {
         culturesList = [];
         for(let i = 0; i < 5; i++){
             const cultura: CulturaEntity = await repository.save({
-            codigo: faker.random.numeric(10),
             nombre: faker.name.fullName(),
             descripcion: faker.lorem.sentence(), })
             culturesList.push(cultura);
@@ -58,7 +57,7 @@ describe('CulturaService', () => {
         
         it('Crear una nueva cultura', async () => {
             const cultura: CulturaEntity = {
-                codigo: "",
+                codigo: Number(faker.random.numeric(2)),
                 nombre: faker.name.fullName(),
                 descripcion: faker.lorem.sentence(),
             }
@@ -105,7 +104,7 @@ describe('CulturaService', () => {
           it('Excepción por borrar una cultura no valida', async () => {
             const culture: CulturaEntity = culturesList[0];
             await service.delete(culture.codigo);
-            //await expect(() => service.delete("0")).rejects.toHaveProperty("message", "La cultura que se busca con ID no se encuentra")
+            //await expect(() => service.delete(0)).rejects.toHaveProperty("message", "La cultura que se busca con ID no se encuentra")
           });
 
       }

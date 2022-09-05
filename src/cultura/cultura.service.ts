@@ -12,11 +12,13 @@ export class CulturaService {
     ){}
 
     async findAll(): Promise<CulturaEntity[]> {
-        return await this.culturaRepository.find({ relations: ["artworks", "exhibitions"] });
+        return await this.culturaRepository.find();
+        //return await this.culturaRepository.find({ relations: ["artworks", "exhibitions"] });
     }
 
-    async findOne(codigo: string): Promise<CulturaEntity> {
-        const culture: CulturaEntity = await this.culturaRepository.findOne({where: {codigo}, relations: ["artworks", "exhibitions"] } );
+    async findOne(codigo: number): Promise<CulturaEntity> {
+        const culture: CulturaEntity = await this.culturaRepository.findOne({where: {codigo} } );
+        //const culture: CulturaEntity = await this.culturaRepository.findOne({where: {codigo}, relations: ["artworks", "exhibitions"] } );
         if (!culture)
           throw new BusinessLogicException("La cultura que se busca con ID no se encuentra", BusinessError.NOT_FOUND);
     
@@ -27,7 +29,7 @@ export class CulturaService {
         return await this.culturaRepository.save(culture);
     }
 
-    async update(codigo: string, culture: CulturaEntity): Promise<CulturaEntity> {
+    async update(codigo: number, culture: CulturaEntity): Promise<CulturaEntity> {
         const persistedCulture: CulturaEntity = await this.culturaRepository.findOne({where:{codigo}});
         if (!persistedCulture)
           throw new BusinessLogicException("La cultura que se busca con ID no se encuentra", BusinessError.NOT_FOUND);
@@ -35,7 +37,7 @@ export class CulturaService {
         return await this.culturaRepository.save({...persistedCulture, ...culture});
     }
 
-    async delete(codigo: string) {
+    async delete(codigo: number) {
         const culture: CulturaEntity = await this.culturaRepository.findOne({where:{codigo}});
         if (!culture)
           throw new BusinessLogicException("La cultura que se busca con ID no se encuentra", BusinessError.NOT_FOUND);
