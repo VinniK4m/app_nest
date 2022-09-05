@@ -21,7 +21,7 @@ export class PaisService {
         const pais: PaisEntity = await this.paisRepository.findOne({where: {codigo} } );
         if (!pais)
             throw new BusinessLogicException(
-                'El pais no se encuentra',
+                'El país que consulta no existe',
                 BusinessError.NOT_FOUND,
             );
 
@@ -38,7 +38,7 @@ export class PaisService {
         });
         if (!persistedPais)
             throw new BusinessLogicException(
-                'El pais no se encuentra',
+                'El país que actualiza no existe',
                 BusinessError.NOT_FOUND,
             );
 
@@ -52,7 +52,7 @@ export class PaisService {
         });
         if (!pais)
             throw new BusinessLogicException(
-                'El pais no se encuentra',
+                'El país que borra no existe',
                 BusinessError.NOT_FOUND,
             );
 

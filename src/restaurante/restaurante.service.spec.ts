@@ -58,7 +58,7 @@ describe('RestauranteService', () => {
   });
 
   it('findOne should throw an exception for an invalid restaurante', async () => {
-    await expect(() => service.findOne(10)).rejects.toHaveProperty("message", "El restaurante no se encuentra")
+    await expect(() => service.findOne(10)).rejects.toHaveProperty("message", "El recurso solicitado no se encontró")
   });
 /*
   it('create should return a new restaurante', async () => {
@@ -106,7 +106,7 @@ describe('RestauranteService', () => {
     restaurante = {
       ...restaurante, nombre: "New name", nombreCiudad: "New address"
     }
-    await expect(() => service.update(10, restaurante)).rejects.toHaveProperty("message", "El restaurante no se encuentra")
+    await expect(() => service.update(10, restaurante)).rejects.toHaveProperty("message", "El recurso solicitado no existe")
   });
 
   it('delete should remove a restaurante', async () => {
@@ -120,6 +120,6 @@ describe('RestauranteService', () => {
   it('delete should throw an exception for an invalid restaurante', async () => {
     const restaurante: RestauranteEntity = restauranteList[0];
     await service.delete(restaurante.codigo);
-    await expect(() => service.delete(10)).rejects.toHaveProperty("message", "El restaurante no se encuentra")
+    await expect(() => service.delete(10)).rejects.toHaveProperty("message", "El recurso solicitado no existe")
   });
 });

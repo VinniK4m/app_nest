@@ -21,7 +21,7 @@ export class RestauranteService {
         const restaurante: RestauranteEntity = await this.restauranteRepository.findOne({where: {codigo},  } );
         if (!restaurante)
             throw new BusinessLogicException(
-                'El restaurante no se encuentra',
+                'El recurso solicitado no se encontró',
                 BusinessError.NOT_FOUND,
             );
 
@@ -38,7 +38,7 @@ export class RestauranteService {
         });
         if (!persistedrestaurante)
             throw new BusinessLogicException(
-                'El restaurante no se encuentra',
+                'El recurso solicitado no existe',
                 BusinessError.NOT_FOUND,
             );
 
@@ -52,7 +52,7 @@ export class RestauranteService {
         });
         if (!restaurante)
             throw new BusinessLogicException(
-                'El restaurante no se encuentra',
+                'El recurso solicitado no existe',
                 BusinessError.NOT_FOUND,
             );
 

@@ -61,7 +61,7 @@ describe('PaisService', () => {
   });
 
   it('findOne should throw an exception for an invalid pais', async () => {
-    await expect(() => service.findOne(10)).rejects.toHaveProperty("message", "El pais no se encuentra")
+    await expect(() => service.findOne(10)).rejects.toHaveProperty("message", "El país que consulta no existe")
   });
 
   it('create should return a new pais', async () => {
@@ -103,7 +103,7 @@ describe('PaisService', () => {
     pais = {
       ...pais, nombre: "New name", capital: "New address"
     }
-    await expect(() => service.update(10, pais)).rejects.toHaveProperty("message", "El pais no se encuentra")
+    await expect(() => service.update(10, pais)).rejects.toHaveProperty("message", "El país que actualiza no existe")
   });
 
   it('delete should remove a pais', async () => {
@@ -117,6 +117,6 @@ describe('PaisService', () => {
   it('delete should throw an exception for an invalid pais', async () => {
     const pais: PaisEntity = paisList[0];
     await service.delete(pais.codigo);
-    await expect(() => service.delete(0)).rejects.toHaveProperty("message", "El pais no se encuentra")
+    await expect(() => service.delete(0)).rejects.toHaveProperty("message", "El país que borra no existe")
   });
 });
