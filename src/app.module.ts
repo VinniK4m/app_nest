@@ -1,4 +1,6 @@
 import { CulturaModule } from './cultura/cultura.module';
+import { RecetaModule } from './receta/receta.module';
+import { PremioMichelinModule } from './premio-michelin/premio-michelin.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,26 +14,30 @@ import { RestauranteModule } from './restaurante/restaurante.module';
 import { PaisEntity } from './pais/pais.entity';
 import { RestauranteEntity } from './restaurante/restaurante.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PremioMichelinEntity } from './premio-michelin/premio-michelin.entity';
+import { RecetaEntity } from './receta/receta.entity';
 
 @Module({
   imports: [
     CulturaModule,ProductoModule,CategoriaModule,
     PaisModule,
     RestauranteModule,
+    RecetaModule,
+    PremioMichelinModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'museumuser',
-      password: '123456',
-      database: 'museumsdb',
-      entities: [ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
+      username: 'root',
+      password: 'root',
+      database: 'culturaGastronomica',
+      entities: [RecetaEntity,PremioMichelinEntity, ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
       dropSchema: true,
       synchronize: true,
-      keepConnectionAlive: true,
+      keepConnectionAlive: true
     }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
