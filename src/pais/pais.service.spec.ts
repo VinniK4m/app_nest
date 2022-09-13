@@ -5,7 +5,6 @@ import {PaisEntity} from "./pais.entity";
 import {Repository} from "typeorm";
 import { faker } from '@faker-js/faker';
 import {getRepositoryToken} from "@nestjs/typeorm";
-import {RestauranteEntity} from "../restaurante/restaurante.entity";
 import {TypeOrmTestingConfig} from "../shared/testing-utils/typeorm-testing-config";
 
 describe('PaisService', () => {
