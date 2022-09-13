@@ -24,14 +24,14 @@ export class PaisController {
 
     @Post()
     async create(@Body() paisDto: PaisDto) {
-        const museum: PaisEntity = plainToInstance(PaisEntity, paisDto);
-        return await this.paisService.create(museum);
+        const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);
+        return await this.paisService.create(pais);
     }
 
     @Put(':paisCodigo')
     async update(@Param('paisCodigo') paisCodigo: number, @Body() paisDto: PaisDto) {
-        const museum: PaisEntity = plainToInstance(PaisEntity, paisDto);
-        return await this.paisService.update(paisCodigo, museum);
+        const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);
+        return await this.paisService.update(paisCodigo, pais);
     }
 
     @Delete(':paisCodigo')
