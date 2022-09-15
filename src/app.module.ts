@@ -33,7 +33,7 @@ import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.modul
       username: 'museumuser',
       password: '123456',
       database: 'museumsdb',
-      entities: [RecetaEntity,PremioMichelinEntity, ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
+      entities: [RecetaEntity, PremioMichelinEntity, ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
