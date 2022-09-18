@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PremioMichelinEntity } from '../premio-michelin/premio-michelin.entity';
-import { PremioMichelinService } from '../premio-michelin/premio-michelin.service';
 import { RestauranteEntity } from '../restaurante/restaurante.entity';
 import { Repository } from 'typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
