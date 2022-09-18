@@ -18,6 +18,7 @@ import { PremioMichelinEntity } from './premio-michelin/premio-michelin.entity';
 import { RecetaEntity } from './receta/receta.entity';
 import { RestaurantePremioModule } from './restaurante-premio/restaurante-premio.module';
 import { CulturaRecetaModule } from './cultura-receta/cultura-receta.module';
+import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { CulturaRecetaModule } from './cultura-receta/cultura-receta.module';
     }),
     RestaurantePremioModule,
     CulturaRecetaModule,
+    PaisRestauranteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
