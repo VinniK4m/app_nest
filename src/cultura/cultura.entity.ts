@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {ProductoEntity} from "../producto/producto.entity";
 
 @Entity()
 export class CulturaEntity {
@@ -11,9 +12,6 @@ export class CulturaEntity {
     @Column()
     descripcion: string;
 
-    /*@OneToMany(() => ExhibitionEntity, exhibition => exhibition.museum)
-    exhibitions: ExhibitionEntity[];
- 
-    @OneToMany(() => ArtworkEntity, artwork => artwork.museum)
-    artworks: ArtworkEntity[];*/
+    @ManyToMany(() => ProductoEntity, producto => producto.culturas)
+    productos: ProductoEntity[];
 }

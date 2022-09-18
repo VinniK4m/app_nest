@@ -17,6 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PremioMichelinEntity } from './premio-michelin/premio-michelin.entity';
 import { RecetaEntity } from './receta/receta.entity';
 import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.module';
+import { CategoriaProductoModule } from './categoria-producto/categoria-producto.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.modul
       keepConnectionAlive: true
     }),
     PaisRestauranteModule,
+    CategoriaProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

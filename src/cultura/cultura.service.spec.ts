@@ -21,7 +21,7 @@ describe('CulturaService', () => {
 
     service = module.get<CulturaService>(CulturaService);
     repository = module.get<Repository<CulturaEntity>>(
-      getRepositoryToken(CulturaEntity),
+        getRepositoryToken(CulturaEntity),
     );
     await seedDatabase();
   });
@@ -51,7 +51,7 @@ describe('CulturaService', () => {
   it('findOne retorna una cultura por id', async () => {
     const culturaAlmacenada: CulturaEntity = culturesList[0];
     const cultura: CulturaEntity = await service.findOne(
-      culturaAlmacenada.codigo,
+        culturaAlmacenada.codigo,
     );
     expect(cultura).not.toBeNull();
     expect(cultura.nombre).toEqual(culturaAlmacenada.nombre);
@@ -67,6 +67,7 @@ describe('CulturaService', () => {
       codigo: Number(faker.random.numeric(2)),
       nombre: faker.name.fullName(),
       descripcion: faker.lorem.sentence(),
+      productos:[]
     };
 
     const newCulture: CulturaEntity = await service.create(cultura);
@@ -86,8 +87,8 @@ describe('CulturaService', () => {
     culture.descripcion = 'Nueva descripcion de una cultura';
 
     const updatedCulture: CulturaEntity = await service.update(
-      culture.codigo,
-      culture,
+        culture.codigo,
+        culture,
     );
     expect(updatedCulture).not.toBeNull();
 
