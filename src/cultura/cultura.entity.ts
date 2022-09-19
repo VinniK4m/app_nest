@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {ProductoEntity} from "../producto/producto.entity";
 import { RecetaEntity } from '../receta/receta.entity';
 import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
@@ -6,10 +7,10 @@ import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 't
 export class CulturaEntity {
     @PrimaryGeneratedColumn()
     codigo: number;
-    
+
     @Column()
     nombre: string;
-    
+
     @Column()
     descripcion: string;
 

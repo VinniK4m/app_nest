@@ -67,7 +67,8 @@ describe('CulturaService', () => {
       codigo: Number(faker.random.numeric(2)),
       nombre: faker.name.fullName(),
       descripcion: faker.lorem.sentence(),
-      productos:[]
+      productos:[],
+      recetas:[]
     };
 
     const newCulture: CulturaEntity = await service.create(cultura);
