@@ -1,3 +1,4 @@
+import { RestauranteEntity } from '../restaurante/restaurante.entity';
 import {Column, Entity, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'
 
 @Entity()
@@ -8,8 +9,6 @@ export class PremioMichelinEntity {
     @Column()
     fechaConsecucion: Date;
 
-    // @ManyToOne(()=> RestauranteEntity, restaurante=> restaurante.premiosMichelin )
-    // restaurante: RestauranteEntity;
-    
-
+    @ManyToOne(()=> RestauranteEntity, restaurante=> restaurante.premiosMicheline )
+    restaurante: RestauranteEntity;
 }

@@ -61,14 +61,14 @@ describe('RecetaService', () => {
   });
 
   it('create debera retornar una nueva receta', async () => {
-    const receta: RecetaEntity = {
+    const receta: RecetaEntity =   await repository.save( {
       codigo: 1,
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.paragraph(),
       urlFoto: faker.image.imageUrl(),
       procesoPrep: faker.lorem.paragraph(),
       urlVideo: faker.image.imageUrl()
-    }
+    })
  
     const nuevaReceta: RecetaEntity = await service.create(receta);
     expect(nuevaReceta).not.toBeNull();
