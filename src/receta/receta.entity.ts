@@ -1,3 +1,4 @@
+import { CulturaEntity } from '../cultura/cultura.entity';
 import {Column, Entity, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'
 
 @Entity()
@@ -21,7 +22,7 @@ export class RecetaEntity {
     @Column()
     urlVideo: string;
 
-    // @ManyToOne(()=> CulturaEntity, cultura=> cultura.recetas )
-    // cultura: CulturaEntity;
+    @ManyToOne(()=> CulturaEntity, cultura=> cultura.recetas )
+    cultura: CulturaEntity;
 
 }

@@ -49,10 +49,10 @@ describe('PremioMichelinService', () => {
   });
 
   it('create debera retornar un nuevo premio', async () => {
-    const premio: PremioMichelinEntity = {
+    const premio: PremioMichelinEntity = await repository.save( {
       codigo: 1,
-      fechaConsecucion: faker.date.recent(),
-    }
+      fechaConsecucion: faker.date.recent()
+    })
  
     const nuevoPremio: PremioMichelinEntity = await service.create(premio);
     expect(nuevoPremio).not.toBeNull();

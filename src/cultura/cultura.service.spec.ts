@@ -51,7 +51,7 @@ describe('CulturaService', () => {
   it('findOne retorna una cultura por id', async () => {
     const culturaAlmacenada: CulturaEntity = culturesList[0];
     const cultura: CulturaEntity = await service.findOne(
-        culturaAlmacenada.codigo,
+      culturaAlmacenada.codigo,
     );
     expect(cultura).not.toBeNull();
     expect(cultura.nombre).toEqual(culturaAlmacenada.nombre);
