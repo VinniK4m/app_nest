@@ -14,7 +14,6 @@ export class PaisService {
 
     async findAll(): Promise<PaisEntity[]> {
         return await this.paisRepository.find({
-
         });
     }
     async findOne(codigo: number): Promise<PaisEntity> {
