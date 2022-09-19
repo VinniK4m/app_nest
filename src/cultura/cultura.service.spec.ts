@@ -63,11 +63,11 @@ describe('CulturaService', () => {
   });
 
   it('Crear una nueva cultura', async () => {
-    const cultura: CulturaEntity = {
+    const cultura: CulturaEntity =  await repository.save( {
       codigo: Number(faker.random.numeric(2)),
       nombre: faker.name.fullName(),
       descripcion: faker.lorem.sentence(),
-    };
+    });
 
     const newCulture: CulturaEntity = await service.create(cultura);
     expect(newCulture).not.toBeNull();

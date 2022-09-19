@@ -16,6 +16,8 @@ import { RestauranteEntity } from './restaurante/restaurante.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PremioMichelinEntity } from './premio-michelin/premio-michelin.entity';
 import { RecetaEntity } from './receta/receta.entity';
+import { RestaurantePremioModule } from './restaurante-premio/restaurante-premio.module';
+import { CulturaRecetaModule } from './cultura-receta/cultura-receta.module';
 import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.module';
 
 @Module({
@@ -37,6 +39,8 @@ import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.modul
       synchronize: true,
       keepConnectionAlive: true
     }),
+    RestaurantePremioModule,
+    CulturaRecetaModule,
     PaisRestauranteModule,
   ],
   controllers: [AppController],
