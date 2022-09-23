@@ -1,8 +1,6 @@
-import { IsNumber, IsString, IsUrl } from "class-validator";
+import { IsString, IsUrl, IsOptional } from "class-validator";
 
 export class RecetaDTO {
-  @IsNumber()
-  readonly codigo: number;
 
   @IsString()
   readonly nombre: string;
@@ -17,6 +15,7 @@ export class RecetaDTO {
   readonly procesoPrep: string;
 
   @IsUrl()
+  @IsOptional()
   readonly urlVideo: string;
 
 }

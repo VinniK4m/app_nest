@@ -1,7 +1,9 @@
-import { Controller, Get, Param, Post } from "@nestjs/common";
+import { Controller, Get, Param, Post, UseInterceptors } from "@nestjs/common";
 import { RestaurantePremioService } from "./restaurante-premio.service";
+import { BusinessErrorsInterceptor } from "../shared/interceptors/business-errors.interceptor";
 
 @Controller("restaurantes")
+@UseInterceptors(BusinessErrorsInterceptor)
 export class RestaurantePremioController {
   constructor(private readonly restaurantePremioService: RestaurantePremioService) {
   }
