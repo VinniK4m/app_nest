@@ -1,10 +1,13 @@
 /* eslint-disable prettier/prettier */
-import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards, UseInterceptors} from '@nestjs/common';
 import {PaisService} from "./pais.service";
 import {PaisDto} from "./pais.dto";
 import {PaisEntity} from "./pais.entity";
 import {plainToInstance} from "class-transformer";
 import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.interceptor";
+import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
+import {Roles} from "../user/roles.decorator";
+import {Role} from "../user/role";
 
 @Controller('paises')
 @UseInterceptors(BusinessErrorsInterceptor)
@@ -22,6 +25,9 @@ export class PaisController {
         return await this.paisService.findOne(paisCodigo);
     }
 
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(201)
+    @Roles(Role.ADMIN)
     @Post()
     async create(@Body() paisDto: PaisDto) {
         const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);

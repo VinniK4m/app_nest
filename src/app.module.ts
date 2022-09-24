@@ -21,6 +21,8 @@ import { RestaurantePremioModule } from './restaurante-premio/restaurante-premio
 import { CulturaRecetaModule } from './cultura-receta/cultura-receta.module';
 import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.module';
 import { CategoriaProductoModule } from './categoria-producto/categoria-producto.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -45,6 +47,8 @@ import { CategoriaProductoModule } from './categoria-producto/categoria-producto
     CulturaRecetaModule,
     PaisRestauranteModule,
     CategoriaProductoModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
