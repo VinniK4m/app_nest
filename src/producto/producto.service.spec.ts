@@ -29,14 +29,14 @@ describe('ProductoService', () => {
     repository.clear();
     productosList = [];
     for(let i = 0; i < 5; i++){
-        const producto: ProductoEntity = await repository.save({
+      const producto: ProductoEntity = await repository.save({
         nombre: faker.company.name(),
         descripcion: faker.lorem.sentence(),
         historia: faker.lorem.sentence()})
       productosList.push(producto);
     }
   }
-    
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
@@ -54,7 +54,7 @@ describe('ProductoService', () => {
     expect(producto.nombre).toEqual(storedProducto.nombre)
     expect(producto.descripcion).toEqual(storedProducto.descripcion)
     expect(producto.historia).toEqual(storedProducto.historia)
-    });
+  });
 
   it('findOne debería lanzar una excepcion para un producto invalido', async () => {
     await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "El producto con este identificador no fue encontrado")
@@ -71,7 +71,9 @@ describe('ProductoService', () => {
       nombre: faker.company.name(),
       descripcion: faker.lorem.sentence(),
       historia: faker.address.secondaryAddress(),
-      categoria
+      categoria: null,
+      culturas: []
+
     }
 
     const newProducto: ProductoEntity = await service.create(producto);
@@ -89,16 +91,16 @@ describe('ProductoService', () => {
     const producto: ProductoEntity = productosList[0];
     producto.nombre = "New nombre";
     producto.descripcion = "New descripcion";
-  
+
     const updatedProducto: ProductoEntity = await service.update(producto.codigo, producto);
     expect(updatedProducto).not.toBeNull();
-  
+
     const storedProducto: ProductoEntity = await repository.findOne({ where: { codigo: producto.codigo } })
     expect(storedProducto).not.toBeNull();
     expect(storedProducto.nombre).toEqual(producto.nombre)
     expect(storedProducto.descripcion).toEqual(producto.descripcion)
   });
- 
+
   it('update debería lanzar una excepcion para un producto invalido', async () => {
     let producto: ProductoEntity = productosList[0];
     producto = {
@@ -110,7 +112,7 @@ describe('ProductoService', () => {
   it('delete deberia remover un producto', async () => {
     const producto: ProductoEntity = productosList[0];
     await service.delete(producto.codigo);
-  
+
     const deletedProducto: ProductoEntity = await repository.findOne({ where: { codigo: producto.codigo } })
     expect(deletedProducto).toBeNull();
   });
@@ -120,5 +122,5 @@ describe('ProductoService', () => {
     await service.delete(producto.codigo);
     await expect(() => service.delete(0)).rejects.toHaveProperty("message", "El producto con este identificador no fue encontrado")
   });
- 
+
 });

@@ -13,17 +13,17 @@ export class ProductoService {
     ){}
 
     async findAll(): Promise<ProductoEntity[]> {
-        return await this.productoRepository.find( { relations: ["categoria"] });
+        return await this.productoRepository.find( { relations: ["categoria","culturas"] });
     }
 
     async findOne(codigo: number): Promise<ProductoEntity> {
-        const producto: ProductoEntity = await this.productoRepository.findOne({where: {codigo} , relations: ["categoria"] } );
+        const producto: ProductoEntity = await this.productoRepository.findOne({where: {codigo} , relations: ["categoria","culturas"] } );
         if (!producto)
-          throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
-    
+            throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
+
         return producto;
     }
-    
+
     async create(producto: ProductoEntity): Promise<ProductoEntity> {
         return await this.productoRepository.save(producto);
     }
@@ -31,18 +31,18 @@ export class ProductoService {
     async update(codigo: number, producto: ProductoEntity): Promise<ProductoEntity> {
         const persistedProducto: ProductoEntity = await this.productoRepository.findOne({where:{codigo}});
         if (!persistedProducto)
-          throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
 
         producto.codigo = codigo;
-        
+
         return await this.productoRepository.save(producto);
     }
 
     async delete(codigo: number) {
         const producto: ProductoEntity = await this.productoRepository.findOne({where:{codigo}});
         if (!producto)
-          throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
-      
+            throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
+
         await this.productoRepository.remove(producto);
     }
 }
