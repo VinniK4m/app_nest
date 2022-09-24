@@ -19,7 +19,7 @@ describe('CategoriaService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [...TypeOrmTestingConfig()],
-    providers: [CategoriaService],
+      providers: [CategoriaService],
     }).compile();
 
     service = module.get<CategoriaService>(CategoriaService);
@@ -31,13 +31,13 @@ describe('CategoriaService', () => {
     repository.clear();
     categoriasList = [];
     for(let i = 0; i < 5; i++){
-        const categoria: CategoriaEntity = await repository.save({
+      const categoria: CategoriaEntity = await repository.save({
         nombre: faker.company.name()
-        })
+      })
       categoriasList.push(categoria);
     }
   }
-    
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
@@ -54,7 +54,7 @@ describe('CategoriaService', () => {
     expect(categoria).not.toBeNull();
     expect(categoria.nombre).toEqual(storedCategoria.nombre)
 
-    });
+  });
 
   it('findOne debería lanzar una excepcion para una categoria invalida ', async () => {
     await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "La categoria con este identificador no fue encontrada")
@@ -80,16 +80,16 @@ describe('CategoriaService', () => {
     const categoria: CategoriaEntity = categoriasList[0];
     categoria.nombre = "New nombre";
 
-  
+
     const updatedCategoria: CategoriaEntity = await service.update(categoria.codigo, categoria);
     expect(updatedCategoria).not.toBeNull();
-  
+
     const storedCategoria: CategoriaEntity = await repository.findOne({ where: { codigo: categoria.codigo } })
     expect(storedCategoria).not.toBeNull();
     expect(storedCategoria.nombre).toEqual(categoria.nombre)
 
   });
- 
+
   it('update debería lanzar una excepcion para una categoria invalida', async () => {
     let categoria: CategoriaEntity = categoriasList[0];
     categoria = {
@@ -101,7 +101,7 @@ describe('CategoriaService', () => {
   it('delete  deberia remover una categoria', async () => {
     const categoria: CategoriaEntity = categoriasList[0];
     await service.delete(categoria.codigo);
-  
+
     const deletedCategoria: CategoriaEntity = await repository.findOne({ where: { codigo: categoria.codigo } })
     expect(deletedCategoria).toBeNull();
   });
@@ -111,5 +111,5 @@ describe('CategoriaService', () => {
     await service.delete(categoria.codigo);
     await expect(() => service.delete(0)).rejects.toHaveProperty("message", "La categoria con este identificador no fue encontrada")
   });
- 
+
 });

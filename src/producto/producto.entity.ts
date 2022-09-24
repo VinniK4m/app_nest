@@ -1,19 +1,20 @@
 /* eslint-disable prettier/prettier */
 
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import {Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm"
 import {CategoriaEntity} from "../categoria/categoria.entity";
+import {CulturaEntity} from "../cultura/cultura.entity";
 
 @Entity()
 export class ProductoEntity {
     @PrimaryGeneratedColumn()
     codigo: number;
- 
+
     @Column()
     nombre: string;
- 
+
     @Column()
     descripcion: string;
- 
+
 
     @Column()
     historia: string;
@@ -23,15 +24,8 @@ export class ProductoEntity {
     categoria: CategoriaEntity;
 
 
+    @ManyToMany(() => CulturaEntity, cultura => cultura.productos)
+    culturas: CulturaEntity[];
 
-    /*
 
-
-
-        @OneToMany(() => ArtworkEntity, artwork => artwork.artist)
-        artworks: ArtworkEntity[];
-
-        @ManyToMany(() => MovementEntity, movement => movement.artists)
-        movements: MovementEntity[];
-    */
 }

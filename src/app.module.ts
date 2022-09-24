@@ -20,6 +20,7 @@ import { RecetaEntity } from './receta/receta.entity';
 import { RestaurantePremioModule } from './restaurante-premio/restaurante-premio.module';
 import { CulturaRecetaModule } from './cultura-receta/cultura-receta.module';
 import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.module';
+import { CategoriaProductoModule } from './categoria-producto/categoria-producto.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { PaisRestauranteModule } from './pais-restaurante/pais-restaurante.modul
     RestaurantePremioModule,
     CulturaRecetaModule,
     PaisRestauranteModule,
+    CategoriaProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
