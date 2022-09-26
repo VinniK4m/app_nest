@@ -87,5 +87,6 @@ export class PaisRestauranteService {
 
         pais.restaurantes = pais.restaurantes.filter(e => e.codigo !== restauranteCodigo);
         await this.paisRepository.save(pais);
+        return await this.restauranteRepository.remove(restaurante);
     }
 }

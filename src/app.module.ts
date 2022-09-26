@@ -1,13 +1,14 @@
+/* eslint-disable prettier/prettier */
 import { CulturaModule } from './cultura/cultura.module';
 import { RecetaModule } from './receta/receta.module';
 import { PremioMichelinModule } from './premio-michelin/premio-michelin.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {ProductoModule} from "./producto/producto.module";
-import {ProductoEntity} from "./producto/producto.entity";
-import {CategoriaModule} from "./categoria/categoria.module";
-import {CategoriaEntity} from "./categoria/categoria.entity";
+import { ProductoModule } from "./producto/producto.module";
+import { ProductoEntity } from "./producto/producto.entity";
+import { CategoriaModule } from "./categoria/categoria.module";
+import { CategoriaEntity } from "./categoria/categoria.entity";
 import { CulturaEntity } from './cultura/cultura.entity';
 import { PaisModule } from './pais/pais.module';
 import { RestauranteModule } from './restaurante/restaurante.module';
@@ -32,10 +33,10 @@ import { CategoriaProductoModule } from './categoria-producto/categoria-producto
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'root',
-      password: 'root',
-      database: 'culturaGastronomica',
-      entities: [RecetaEntity,PremioMichelinEntity, ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
+      username: 'museumuser',
+      password: '123456',
+      database: 'museumsdb',
+      entities: [RecetaEntity, PremioMichelinEntity, ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true

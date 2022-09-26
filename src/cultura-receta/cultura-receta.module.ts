@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { CulturaRecetaService } from './cultura-receta.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
