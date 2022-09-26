@@ -5,17 +5,19 @@ import {PaisDto} from "./pais.dto";
 import {PaisEntity} from "./pais.entity";
 import {plainToInstance} from "class-transformer";
 import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.interceptor";
-import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
 import {Roles} from "../user/roles.decorator";
 import {Role} from "../user/role";
+import {RolesGuard} from "../user/roles.guard";
 
 @Controller('paises')
 @UseInterceptors(BusinessErrorsInterceptor)
+@UseGuards(RolesGuard)
 export class PaisController {
 
     constructor(private readonly paisService: PaisService) {}
 
     @Get()
+    @Roles(Role.USER)
     async findAll() {
         return await this.paisService.findAll();
     }
@@ -25,7 +27,7 @@ export class PaisController {
         return await this.paisService.findOne(paisCodigo);
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @HttpCode(201)
     @Roles(Role.ADMIN)
     @Post()
