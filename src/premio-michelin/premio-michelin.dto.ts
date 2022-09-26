@@ -1,5 +1,9 @@
+import { IsNotEmpty, IsDateString } from "class-validator";
+
 export class PremioMichelinDTO {
-    readonly codigo: number;
-    readonly fechaConsecucion: Date;
+
+  @IsNotEmpty()
+  @IsDateString()
+  readonly fechaConsecucion: Date;
 
 }
