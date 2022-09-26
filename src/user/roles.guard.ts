@@ -8,7 +8,7 @@ import {Role} from "./role";
 export class RolesGuard implements CanActivate {
     constructor(private reflector: Reflector) {}
     canActivate(context: ExecutionContext): boolean {
-        //console.log('FINNMNNNNN')
+
         const requireRoles = this.reflector.getAllAndOverride<Role[]>("roles", [
             context.getHandler(),
             context.getClass(),
@@ -20,7 +20,7 @@ export class RolesGuard implements CanActivate {
         // const {user}=context.switchToHttp().getRequest();
         const user: User = {
             username: "Nishant",
-            roles: [Role.ADMIN],
+            roles: [Role.USERDEL],
             id: 1,
             password: "123"
         };
