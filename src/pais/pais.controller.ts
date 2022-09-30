@@ -16,9 +16,9 @@ import {PaisDto} from "./pais.dto";
 import {PaisEntity} from "./pais.entity";
 import {plainToInstance} from "class-transformer";
 import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.interceptor";
-import {Roles} from "../shared/roles.decorator";
-import {RoleType} from "../shared/role";
-import {RolesGuard} from "../shared/roles.guard";
+import {Roles} from "../role/roles.decorator";
+import {RoleType} from "../role/role";
+import {RolesGuard} from "../role/roles.guard";
 import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
 
 @Controller('paises')

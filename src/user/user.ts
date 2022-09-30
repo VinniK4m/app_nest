@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {RoleType} from "../shared/role";
+import {RoleType} from "../role/role";
 
 export class User {
     id: number;

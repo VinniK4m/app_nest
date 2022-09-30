@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { User } from './user';
-import {RoleType} from "../shared/role";
+import {RoleType} from "../role/role";
 
 @Injectable()
 export class UserService {
