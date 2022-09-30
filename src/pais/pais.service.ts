@@ -14,11 +14,10 @@ export class PaisService {
 
     async findAll(): Promise<PaisEntity[]> {
         return await this.paisRepository.find({
-
         });
     }
     async findOne(codigo: number): Promise<PaisEntity> {
-        const pais: PaisEntity = await this.paisRepository.findOne({where: {codigo} } );
+        const pais: PaisEntity = await this.paisRepository.findOne({where: {codigo},  relations: ["restaurantes"]  } );
         if (!pais)
             throw new BusinessLogicException(
                 'El país que consulta no existe',

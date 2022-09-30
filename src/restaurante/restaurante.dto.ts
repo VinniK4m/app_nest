@@ -1,6 +1,15 @@
-export class RestauranteDTO {
+/* eslint-disable prettier/prettier */
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class RestauranteDto {
     readonly codigo: number;
+
+    @IsString()
+    @IsNotEmpty()
     readonly nombre: string;
-    readonly nombreCiudad: String;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly nombreCiudad: string;
 
 }

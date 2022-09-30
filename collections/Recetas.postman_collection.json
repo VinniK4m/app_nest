@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "97dd2589-8bfe-44ed-b066-ec5fb323993f",
+		"name": "Recetas",
+		"description": "Documentación para el recurso de premios michelin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5687446"
+	},
+	"item": [
+		{
+			"name": "Agregar una receta a una cultura gastronomica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturasGastronomica/{{culturaId}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturasGastronomica",
+						"{{culturaId}}",
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo premio michelin. El API retorna el recurso creado con el ID asignado"
+			},
+			"response": [
+				{
+					"name": "Agregar una receta a una cultura gastronomica",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturasGastronomica/{{culturaId}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturasGastronomica",
+								"{{culturaId}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n \"codigo\": 123,\n \"nombre\":\"Enchiladas\",\n \"descripción\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\n \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\n \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\n \"urlVideo\": null,\n \"culturaGastronomica\":{\n     \"codigo\": 1,\n     \"nombre\": \"Cultura mexicana\",\n     \"descripcion\": \"La gastronomía mexicana es muy especial, varía de región a región y depende de los alimentos básicos que se cosechan en sus tierras. Ha sido influenciada de diversas formas por los conquistadores, el clima y la geografía cambiante; esto ha jugado un papel importante en la selección de tradición del país.\"\n }\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear una receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"receta_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nombre\":\"Enchiladas\",\r\n \"descripcion\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\r\n \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\r\n \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\r\n \"urlVideo\": \"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/recetas/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						""
+					]
+				},
+				"description": "Esta solicitud crea un nuevo premio michelin. El API retorna el recurso creado con el ID asignado"
+			},
+			"response": [
+				{
+					"name": "Agregar una receta a una cultura gastronomica",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturasGastronomica/{{culturaId}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturasGastronomica",
+								"{{culturaId}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n \"codigo\": 123,\n \"nombre\":\"Enchiladas\",\n \"descripción\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\n \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\n \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\n \"urlVideo\": null,\n \"culturaGastronomica\":{\n     \"codigo\": 1,\n     \"nombre\": \"Cultura mexicana\",\n     \"descripcion\": \"La gastronomía mexicana es muy especial, varía de región a región y depende de los alimentos básicos que se cosechan en sus tierras. Ha sido influenciada de diversas formas por los conquistadores, el clima y la geografía cambiante; esto ha jugado un papel importante en la selección de tradición del país.\"\n }\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar una receta a una cultura gastronomica invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La receta con este codigo, no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturasGastronomica/0/recetas/{{recetaId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturasGastronomica",
+						"0",
+						"recetas",
+						"{{recetaId}}"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo premio michelin. El API retorna el recurso creado con el ID asignado"
+			},
+			"response": [
+				{
+					"name": "Agregar una receta a una cultura gastronomica invalida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturasGastronomica/{{culturaId}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturasGastronomica",
+								"{{culturaId}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Cultura gastronomica no encontrada, identificador de cultura invalido\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las recetas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Numero de recetas > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las recetas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\r\n    {\r\n    \"codigo\": 123,\r\n    \"nombre\":\"Enchiladas\",\r\n    \"descripción\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\r\n    \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\r\n    \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\r\n    \"urlVideo\": null\r\n    },\r\n    {\r\n    \"codigo\": 1234,\r\n    \"nombre\":\"Espaguetis con pesto siciliano y endibia\",\r\n    \"descripción\":\"La preparación que te traemos en esta oportunidad es un festín al más puro sabor italiano. Con motivo del Día Mundial de la Pasta (25 de octubre) prepararemos una receta homenaje a uno de los platos más icónicos y universales del a cocina italiana.\",\r\n    \"urlFoto\":\"https://t2.rg.ltmcdn.com/es/posts/8/2/7/espaguetis_con_pesto_siciliano_y_endibia_74728_600.jpg\",\r\n    \"procesoPrep\":\"Para comenzar con esta receta de espaguetis con pesto siciliano y endibia, prepara el pesto. Lo ideal es hacerlo en un mortero, pero también puedes prepararlo en una miniprimer. Echa los piñones, la albahaca y un ajo picado. Receta de Espaguetis con pesto siciliano y endibia - Paso 1 2 Cuando los ingredientes se trituren y se integren, vierte poco a poco aceite de oliva y ve triturando hasta que la mezcla emulsione. Receta de Espaguetis con pesto siciliano y endibia - Paso 2 3 Añade el queso parmesano rallado y continúa triturando. Receta de Espaguetis con pesto siciliano y endibia - Paso 3 4 Una vez tengas el pesto listo, resérvalo y continúa con la receta. Receta de Espaguetis con pesto siciliano y endibia - Paso 4 5 Cuece la endibia en agua hirviendo durante 3 minutos con una pizca de sal y una pizca de azúcar. Luego, sácala y espera a que se enfríe para cortarla por la mitad. Receta de Espaguetis con pesto siciliano y endibia - Paso 5 6 En una sartén con mantequilla sella la endibia hasta que dore. Receta de Espaguetis con pesto siciliano y endibia - Paso 6 7 ¡Hora de preparar la pasta! Hazlo siguiendo las indicaciones del fabricante y cuela el agua. Receta de Espaguetis con pesto siciliano y endibia - Paso 7 8 En una sartén grande, sofríe los espaguetis con sal, orégano, ajo y la guindilla pequeña. Baña en salsa de tomate Orlando Clásico y mezcla todo. ¡El resultado será una salsa casera con espagueti súper aromática! Receta de Espaguetis con pesto siciliano y endibia - Paso 8 9 Emplata los espaguetis con pesto siciliano y endibia. Espolvorea queso parmesano rallado. Receta de Espaguetis con pesto siciliano y endibia - Paso 9 10 ¡Ahora solo queda deleitarse con el riquísimo sabor del pesto en combinación con el tomate y el romero! El otoño es temporada de endibias, así que también es una perfecta oportunidad para aprovechar esta verdura que le dará equilibrio al plato.\",\r\n    \"urlVideo\": null\r\n    } \r\n]\r\n"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las recetas de una cultura gastronomica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturasGastronomica/{{culturaId}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturasGastronomica",
+						"{{culturaId}}",
+						"recetas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las recetas de una cultura gastronomica",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturasGastronomica/{{culturaId}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturasGastronomica",
+								"{{culturaId}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n     \"codigo\": 1,\r\n     \"nombre\": \"Cultura mexicana\",\r\n     \"descripcion\": \"La gastronomía mexicana es muy especial, varía de región a región y depende de los alimentos básicos que se cosechan en sus tierras. Ha sido influenciada de diversas formas por los conquistadores, el clima y la geografía cambiante; esto ha jugado un papel importante en la selección de tradición del país.\",\r\n    \"recetas\": [\r\n        {\r\n        \"codigo\": 123,\r\n        \"nombre\":\"Enchiladas\",\r\n        \"descripción\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\r\n        \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\r\n        \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\r\n        \"urlVideo\": null\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las recetas de una cultura invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La receta con este codigo, no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturasGastronomica/0/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturasGastronomica",
+						"0",
+						"recetas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las recetas de una cultura invalida",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturasGastronomica/00000-00000-000/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturasGastronomica",
+								"00000-00000-000",
+								"recetas"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 404,\r\n    \"message\": \"Recetas no encontradas, identificador de cultura invalido\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{recetaId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{recetaId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una receta",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{recetaId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{recetaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"codigo\": 123,\r\n    \"nombre\":\"Enchiladas\",\r\n    \"descripción\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\r\n    \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\r\n    \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\r\n    \"urlVideo\": null\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La receta con este codigo no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una receta invalida",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con este codigo, no fue encontrado\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nombre\":\"Enchiladas\",\r\n \"descripcion\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\r\n \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\r\n \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\r\n \"urlVideo\": \"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{recetaId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{recetaId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una receta",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"nombre\": \"Enchiladas verdes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{recetaId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{recetaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n \"codigo\": 123,\n \"nombre\":\"Enchiladas verdes\",\n \"descripción\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\n \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\n \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\n \"urlVideo\": null,\n \"culturaGastronomica\":{\n     \"codigo\": 1,\n     \"nombre\": \"Cultura mexicana\",\n     \"descripcion\": \"La gastronomía mexicana es muy especial, varía de región a región y depende de los alimentos básicos que se cosechan en sus tierras. Ha sido influenciada de diversas formas por los conquistadores, el clima y la geografía cambiante; esto ha jugado un papel importante en la selección de tradición del país.\"\n }\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar receta invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La receta con este codigo no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nombre\":\"Enchiladas\",\r\n \"descripcion\":\"Las enchiladas constituyen uno de los platos más tradicionales de México. En esta ocasión queremos enseñarte a preparar de forma sencilla unas enchiladas de pollo, ¡no te pierdas los pasos!\",\r\n \"urlFoto\":\"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\",\r\n \"procesoPrep\":\"1 Trituramos los tomates con la batidora (si tenemos licuadora también sirve). Añadimos los chiles, la cebolla pelada y cortada y las pastillas de caldo de ave y seguimos licuando. 2 Pasamos la salsa a una cazuela de barro y dejamos que hierva y se guise a fuego lento durante 15-20 minutos aproximadamente. Mientras tanto, rallamos el queso. Es importante utilizar un tipo de queso que se pueda fundir bien. 3 Aparte, preparamos las tortillas de maíz. Ponemos una sartén con abundante aceite a calentar y, una vez caliente, ponemos las tortillas de una en una. Las cocinamos vuelta y vuelta para evitar que se pongan duras, deben quedar blanditas. Las vamos colocando en un plato con papel absorbente para retirar el exceso de aceite. 4 Sumergimos una enchilada con las pinzas para no mancharnos y la sumergimos en la salsa roja, la colocamos sobre un plato y rellenamos con el pollo previamente hervido y desmenuzado. Enrollamos la enchilada como un taco o la doblamos como una quesadilla, lo que más nos guste. Repetimos este proceso con todas las tortillas. 5 Cogemos una bandeja de horno o una refractaria y colocamos las enchiladas una al lado de la otra. Luego, repartimos la nata o crema agria de forma uniforme y espolvoreamos el queso rallado. Ahora solo nos queda gratinar el queso en el horno y ¡listo! 6 Podemos acompañar las enchiladas mexicanas de pollo con una ensalada de lechuga o la guarnición que más nos guste.\",\r\n \"urlVideo\": \"https://t1.rg.ltmcdn.com/es/posts/5/4/1/enchiladas_mexicanas_de_pollo_38145_orig.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/recetas/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar receta invalida",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Smithsonian national museum of natural history\",\r\n   \"description\": \"The world's most popular natural history museum is dedicated to understanding the natural world and our place in it. Delve into the fascinating story of our planet, from its fiery beginnings through billions of years of transformation, and explore life on Earth through exhibitions and activities, collection objects and research that happens in the lab and in the field. The museum is larger than 18 football fields and is home to the largest natural history collection in the world.\",\r\n   \"address\": \"10th St. & Constitution Ave. NW, Washington, DC (new address)\",\r\n   \"city\": \"Washington DC\",\r\n   \"image\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/recetas/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con este codigo no fue encontrado\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{recetaId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{recetaId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar receta",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{recetaId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{recetaId}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Borrar receta invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La receta con este codigo no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar receta invalida",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con este codigo no fue encontrado\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "recetaId",
+			"value": "2"
+		},
+		{
+			"key": "culturaId",
+			"value": "1"
+		}
+	]
+}
