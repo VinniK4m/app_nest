@@ -8,7 +8,6 @@ import {
     Param,
     Post,
     Put,
-    SetMetadata,
     UseGuards,
     UseInterceptors
 } from '@nestjs/common';
@@ -20,29 +19,29 @@ import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.
 import {Roles} from "../shared/roles.decorator";
 import {RoleType} from "../shared/role";
 import {RolesGuard} from "../shared/roles.guard";
+import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
 
 @Controller('paises')
 @UseInterceptors(BusinessErrorsInterceptor)
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class PaisController {
 
     constructor(private readonly paisService: PaisService) {}
 
     @Get()
-    @SetMetadata('roles', [RoleType.USERGET, RoleType.ADMIN])
+    @Roles(RoleType.USERGET, RoleType.ADMIN)
     async findAll() {
         return await this.paisService.findAll();
     }
 
     @Get(':paisCodigo')
-    @Roles(RoleType.USERGET)
+    @Roles(RoleType.USERGET, RoleType.ADMIN)
     async findOne(@Param('paisCodigo') paisCodigo: number) {
         return await this.paisService.findOne(paisCodigo);
     }
 
-    //@UseGuards(JwtAuthGuard)
     @HttpCode(201)
-    @Roles(RoleType.USERPOST)
+    @Roles(RoleType.USERPOST, RoleType.ADMIN)
     @Post()
     async create(@Body() paisDto: PaisDto) {
         const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);
@@ -50,7 +49,7 @@ export class PaisController {
     }
 
     @Put(':paisCodigo')
-    @Roles(RoleType.USERPOST)
+    @Roles(RoleType.USERPOST, RoleType.ADMIN)
     async update(@Param('paisCodigo') paisCodigo: number, @Body() paisDto: PaisDto) {
         const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);
         return await this.paisService.update(paisCodigo, pais);
@@ -58,7 +57,7 @@ export class PaisController {
 
     @Delete(':paisCodigo')
     @HttpCode(204)
-    @Roles(RoleType.USERDEL)
+    @Roles(RoleType.USERDEL,RoleType.ADMIN)
     async delete(@Param('paisCodigo') paisCodigo: number) {
         return await this.paisService.delete(paisCodigo);
     }
