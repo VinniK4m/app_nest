@@ -17,9 +17,9 @@ import {PaisDto} from "./pais.dto";
 import {PaisEntity} from "./pais.entity";
 import {plainToInstance} from "class-transformer";
 import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.interceptor";
-import {Roles} from "../user/roles.decorator";
-import {Role} from "../user/role";
-import {RolesGuard} from "../user/roles.guard";
+import {Roles} from "../shared/roles.decorator";
+import {Role} from "../shared/role";
+import {RolesGuard} from "../shared/roles.guard";
 
 @Controller('paises')
 @UseInterceptors(BusinessErrorsInterceptor)
