@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {ProductoEntity} from "../producto/producto.entity";
 import { RecetaEntity } from '../receta/receta.entity';
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
 export class CulturaEntity {
@@ -15,6 +15,7 @@ export class CulturaEntity {
     descripcion: string;
 
     @ManyToMany(() => ProductoEntity, producto => producto.culturas)
+    @JoinTable()
     productos: ProductoEntity[];
 
     @OneToMany(() => RecetaEntity, receta => receta.cultura)

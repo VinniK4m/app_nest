@@ -5,7 +5,7 @@ import { CulturaEntity } from '../cultura/cultura.entity';
 import { RecetaEntity } from '../receta/receta.entity';
 
 @Module({
-  providers: [CulturaRecetaService]
+  providers: [CulturaRecetaService],
   imports: [TypeOrmModule.forFeature([CulturaEntity, RecetaEntity])],
 
 })
