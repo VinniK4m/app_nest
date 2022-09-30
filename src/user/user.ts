@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
-import {Role} from "../shared/role";
+import {RoleType} from "../shared/role";
 
 export class User {
     id: number;
     username: string;
     password: string;
-    roles: Role[];
+    roles: RoleType[];
 
-    constructor(id: number, username: string, password: string, roles: Role[]) {
+    constructor(id: number, username: string, password: string, roles: RoleType[]) {
         this.id = id;
         this.username = username;
         this.password = password;

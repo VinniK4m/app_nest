@@ -18,7 +18,7 @@ import {PaisEntity} from "./pais.entity";
 import {plainToInstance} from "class-transformer";
 import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.interceptor";
 import {Roles} from "../shared/roles.decorator";
-import {Role} from "../shared/role";
+import {RoleType} from "../shared/role";
 import {RolesGuard} from "../shared/roles.guard";
 
 @Controller('paises')
@@ -29,20 +29,20 @@ export class PaisController {
     constructor(private readonly paisService: PaisService) {}
 
     @Get()
-    @SetMetadata('roles', [Role.USERGET, Role.ADMIN])
+    @SetMetadata('roles', [RoleType.USERGET, RoleType.ADMIN])
     async findAll() {
         return await this.paisService.findAll();
     }
 
     @Get(':paisCodigo')
-    @Roles(Role.USERGET)
+    @Roles(RoleType.USERGET)
     async findOne(@Param('paisCodigo') paisCodigo: number) {
         return await this.paisService.findOne(paisCodigo);
     }
 
     //@UseGuards(JwtAuthGuard)
     @HttpCode(201)
-    @Roles(Role.USERPOST)
+    @Roles(RoleType.USERPOST)
     @Post()
     async create(@Body() paisDto: PaisDto) {
         const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);
@@ -50,7 +50,7 @@ export class PaisController {
     }
 
     @Put(':paisCodigo')
-    @Roles(Role.USERPUT)
+    @Roles(RoleType.USERPOST)
     async update(@Param('paisCodigo') paisCodigo: number, @Body() paisDto: PaisDto) {
         const pais: PaisEntity = plainToInstance(PaisEntity, paisDto);
         return await this.paisService.update(paisCodigo, pais);
@@ -58,7 +58,7 @@ export class PaisController {
 
     @Delete(':paisCodigo')
     @HttpCode(204)
-    @Roles(Role.USERDEL)
+    @Roles(RoleType.USERDEL)
     async delete(@Param('paisCodigo') paisCodigo: number) {
         return await this.paisService.delete(paisCodigo);
     }

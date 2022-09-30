@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { SetMetadata } from "@nestjs/common";
-import {Role} from "./role";
+import {RoleType} from "./role";
 
 
-export const Roles = (...roles: Role[]) => SetMetadata("roles", roles);
+export const Roles = (...roles: RoleType[]) => SetMetadata("roles", roles);
