@@ -1,18 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { PremioMichelinEntity } from './premio-michelin.entity';
+import { Cache } from "cache-manager";
 
 @Injectable()
 export class PremioMichelinService {
+    cacheKey: string = "premios";
+
     constructor(
         @InjectRepository(PremioMichelinEntity)
-        private readonly premioMichelinRepository: Repository<PremioMichelinEntity>
+        private readonly premioMichelinRepository: Repository<PremioMichelinEntity>,
+        @Inject(CACHE_MANAGER)
+        private readonly cacheManager: Cache
     ){}
 
     async findAll(): Promise<PremioMichelinEntity[]> {
-        return await this.premioMichelinRepository.find({ relations: [] });
+        const cached: PremioMichelinEntity[] = await this.cacheManager.get<PremioMichelinEntity[]>(this.cacheKey);
+        if (!cached) {
+            const premios: PremioMichelinEntity[] = await this.premioMichelinRepository.find({ relations: [] });
+            await this.cacheManager.set(this.cacheKey, premios);
+            return premios;
+        }
+
+        return cached;
     }
 
     async findOne(codigo: number): Promise<PremioMichelinEntity> {

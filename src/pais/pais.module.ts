@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import {PaisEntity} from "./pais.entity";
 import { PaisService } from './pais.service';
 import { PaisController } from './pais.controller';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([PaisEntity])],
+    imports: [TypeOrmModule.forFeature([PaisEntity]), CacheModule.register()],
     providers: [PaisService],
     controllers: [PaisController]
 })
