@@ -43,4 +43,5 @@ export class AuthService {
             token: this.jwtService.sign(payload, { privateKey: constants.JWT_SECRET, expiresIn:constants.JWT_EXPIRES_IN }),
         };
     }
+
 }
