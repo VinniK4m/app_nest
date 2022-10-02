@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export class ProductoDTO {
     readonly codigo: number;
     readonly nombre: string;
