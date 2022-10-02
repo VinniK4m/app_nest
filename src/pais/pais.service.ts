@@ -1,60 +1,74 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
-import {InjectRepository} from "@nestjs/typeorm";
-import {PaisEntity} from "./pais.entity";
-import {Repository} from "typeorm";
-import {BusinessError, BusinessLogicException} from "../shared/errors/BusinessError";
+import { CACHE_MANAGER, Inject, Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { PaisEntity } from "./pais.entity";
+import { Repository } from "typeorm";
+import { BusinessError, BusinessLogicException } from "../shared/errors/BusinessError";
+import { Cache } from "cache-manager";
 
 @Injectable()
 export class PaisService {
-    constructor(
-        @InjectRepository(PaisEntity)
-        private readonly paisRepository: Repository<PaisEntity>,
-    ) {}
+  cacheKey: string = "paises";
 
-    async findAll(): Promise<PaisEntity[]> {
-        return await this.paisRepository.find({
-        });
-    }
-    async findOne(codigo: number): Promise<PaisEntity> {
-        const pais: PaisEntity = await this.paisRepository.findOne({where: {codigo},  relations: ["restaurantes"]  } );
-        if (!pais)
-            throw new BusinessLogicException(
-                'El país que consulta no existe',
-                BusinessError.NOT_FOUND,
-            );
+  constructor(
+    @InjectRepository(PaisEntity)
+    private readonly paisRepository: Repository<PaisEntity>,
+    @Inject(CACHE_MANAGER)
+    private readonly cacheManager: Cache
+  ) {
+  }
 
-        return pais;
+  async findAll(): Promise<PaisEntity[]> {
+    const cached: PaisEntity[] = await this.cacheManager.get<PaisEntity[]>(this.cacheKey);
+    if (!cached) {
+      const paises: PaisEntity[] = await this.paisRepository.find({ relations: [] });
+      await this.cacheManager.set(this.cacheKey, paises);
+      return paises;
     }
 
-    async create(pais: PaisEntity): Promise<PaisEntity> {
-        return await this.paisRepository.save(pais);
-    }
+    return cached;
+  }
 
-    async update(codigo: number, pais: PaisEntity): Promise<PaisEntity> {
-        const persistedPais: PaisEntity = await this.paisRepository.findOne({
-            where: { codigo },
-        });
-        if (!persistedPais)
-            throw new BusinessLogicException(
-                'El país que actualiza no existe',
-                BusinessError.NOT_FOUND,
-            );
+  async findOne(codigo: number): Promise<PaisEntity> {
+    const pais: PaisEntity = await this.paisRepository.findOne({ where: { codigo }, relations: ["restaurantes"] });
+    if (!pais)
+      throw new BusinessLogicException(
+        "El país que consulta no existe",
+        BusinessError.NOT_FOUND
+      );
 
-        pais.codigo = codigo;
+    return pais;
+  }
 
-        return await this.paisRepository.save(pais);
-    }
-    async delete(codigo: number) {
-        const pais: PaisEntity = await this.paisRepository.findOne({
-            where: { codigo },
-        });
-        if (!pais)
-            throw new BusinessLogicException(
-                'El país que borra no existe',
-                BusinessError.NOT_FOUND,
-            );
+  async create(pais: PaisEntity): Promise<PaisEntity> {
+    return await this.paisRepository.save(pais);
+  }
 
-        await this.paisRepository.remove(pais);
-    }
+  async update(codigo: number, pais: PaisEntity): Promise<PaisEntity> {
+    const persistedPais: PaisEntity = await this.paisRepository.findOne({
+      where: { codigo }
+    });
+    if (!persistedPais)
+      throw new BusinessLogicException(
+        "El país que actualiza no existe",
+        BusinessError.NOT_FOUND
+      );
+
+    pais.codigo = codigo;
+
+    return await this.paisRepository.save(pais);
+  }
+
+  async delete(codigo: number) {
+    const pais: PaisEntity = await this.paisRepository.findOne({
+      where: { codigo }
+    });
+    if (!pais)
+      throw new BusinessLogicException(
+        "El país que borra no existe",
+        BusinessError.NOT_FOUND
+      );
+
+    await this.paisRepository.remove(pais);
+  }
 }
