@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
-import {PaisEntity} from "../pais/pais.entity";
 import {Repository} from "typeorm";
-import {RestauranteEntity} from "../restaurante/restaurante.entity";
 import {CategoriaEntity} from "../categoria/categoria.entity";
 import {ProductoEntity} from "../producto/producto.entity";
 import {BusinessError, BusinessLogicException} from "../shared/errors/BusinessError";
+import {ProductoDTO} from "../producto/producto.dto";
 
 @Injectable()
 export class CategoriaProductoService {
@@ -92,6 +91,7 @@ export class CategoriaProductoService {
 
         categoria.productos = categoria.productos.filter(e => e.codigo !== productoCodigo);
         await this.categoriaRepository.save(categoria);
+        return await this.productoRepository.remove(producto);
     }
 
 

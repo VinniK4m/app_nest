@@ -4,6 +4,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import {CategoriaEntity} from "./categoria.entity";
+import {ProductoEntity} from "../producto/producto.entity";
+import {ProductoDTO} from "../producto/producto.dto";
+import {CategoriaDTO} from "./categoria.dto";
 
 
 @Injectable()
@@ -25,18 +28,21 @@ export class CategoriaService {
         return categoria;
     }
 
-    async create(categoria: CategoriaEntity): Promise<CategoriaEntity> {
+    async create(categoriaDTO: CategoriaDTO): Promise<CategoriaDTO> {
+
+        const categoria = new CategoriaEntity();
+        categoria.nombre = categoriaDTO.nombre;
         return await this.categoriaRepository.save(categoria);
     }
 
-    async update(codigo: number, categoria: CategoriaEntity): Promise<CategoriaEntity> {
+    async update(codigo: number, categoriaDTO: CategoriaDTO): Promise<CategoriaDTO> {
         const persistedCategoria: CategoriaEntity = await this.categoriaRepository.findOne({where:{codigo}});
         if (!persistedCategoria)
             throw new BusinessLogicException("La categoria con este identificador no fue encontrada", BusinessError.NOT_FOUND);
 
-        categoria.codigo = codigo;
+        persistedCategoria.nombre = categoriaDTO.nombre;
 
-        return await this.categoriaRepository.save(categoria);
+        return await this.categoriaRepository.save(persistedCategoria);
     }
 
     async delete(codigo: number) {

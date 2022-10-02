@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { ProductoEntity } from './producto.entity';
+import {ProductoDTO} from "./producto.dto";
 
 @Injectable()
 export class ProductoService {
@@ -24,18 +25,24 @@ export class ProductoService {
         return producto;
     }
 
-    async create(producto: ProductoEntity): Promise<ProductoEntity> {
+    async create(productoDTO: ProductoDTO): Promise<ProductoDTO> {
+        const producto = new ProductoEntity();
+        producto.nombre = productoDTO.nombre;
+        producto.historia = productoDTO.historia;
+        producto.descripcion = productoDTO.descripcion;
         return await this.productoRepository.save(producto);
+
     }
 
-    async update(codigo: number, producto: ProductoEntity): Promise<ProductoEntity> {
+    async update(codigo: number, productoDTO: ProductoDTO): Promise<ProductoDTO> {
         const persistedProducto: ProductoEntity = await this.productoRepository.findOne({where:{codigo}});
         if (!persistedProducto)
             throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
 
-        producto.codigo = codigo;
-
-        return await this.productoRepository.save(producto);
+        persistedProducto.nombre = productoDTO.nombre;
+        persistedProducto.historia = productoDTO.historia;
+        persistedProducto.descripcion = productoDTO.descripcion;
+        return await this.productoRepository.save(persistedProducto);
     }
 
     async delete(codigo: number) {
