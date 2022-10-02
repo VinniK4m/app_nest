@@ -8,12 +8,12 @@ import {ProductoEntity} from "../producto/producto.entity";
 import {ProductoDTO} from "../producto/producto.dto";
 import {CategoriaDTO} from "./categoria.dto";
 import { Cache } from "cache-manager";
-import { RecetaEntity } from "../receta/receta.entity";
+
 
 
 @Injectable()
 export class CategoriaService {
-  cacheKey: string = "categorias";
+  cacheKey = "categorias";
 
   constructor(
     @InjectRepository(CategoriaEntity)

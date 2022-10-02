@@ -1,4 +1,7 @@
 /* eslint-disable prettier/prettier */
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
+import { ApolloDriver } from '@nestjs/apollo';
 import { CulturaModule } from "./cultura/cultura.module";
 import { RecetaModule } from "./receta/receta.module";
 import { PremioMichelinModule } from "./premio-michelin/premio-michelin.module";
@@ -27,6 +30,10 @@ import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      driver: ApolloDriver
+    }),
     CulturaModule, ProductoModule, CategoriaModule,
     PaisModule,
     RestauranteModule,
