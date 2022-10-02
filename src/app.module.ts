@@ -24,6 +24,7 @@ import { CategoriaProductoModule } from "./categoria-producto/categoria-producto
 import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 
+
 @Module({
   imports: [
     CulturaModule, ProductoModule, CategoriaModule,

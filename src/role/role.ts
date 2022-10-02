@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
-export enum Role {
+/* eslint-disable prettier/prettier */
+export enum RoleType {
     USERGET = "userget",
     USERPOST = "userpost",
     USERDEL = "userdelete",
-    USERPUT = "userput",
+    USERCULTURA = "usercultura",
     ADMIN = "admin",
+
 }
