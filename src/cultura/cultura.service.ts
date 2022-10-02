@@ -7,7 +7,7 @@ import { Cache } from "cache-manager";
 
 @Injectable()
 export class CulturaService {
-  cacheKey: string = "culturas";
+  cacheKey = "culturas";
 
   constructor(
     @InjectRepository(CulturaEntity)

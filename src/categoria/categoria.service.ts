@@ -13,7 +13,7 @@ import { RecetaEntity } from "../receta/receta.entity";
 
 @Injectable()
 export class CategoriaService {
-  cacheKey: string = "categorias";
+  cacheKey = "categorias";
 
   constructor(
     @InjectRepository(CategoriaEntity)

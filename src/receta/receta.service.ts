@@ -7,7 +7,7 @@ import { RecetaEntity } from "./receta.entity";
 
 @Injectable()
 export class RecetaService {
-  cacheKey: string = "recetas";
+  cacheKey = "recetas";
 
   constructor(
     @InjectRepository(RecetaEntity)

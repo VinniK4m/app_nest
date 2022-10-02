@@ -5,10 +5,11 @@ import { BusinessError, BusinessLogicException } from "../shared/errors/business
 import { Repository } from "typeorm";
 import { ProductoEntity } from "./producto.entity";
 import { Cache } from "cache-manager";
+import {ProductoDTO} from "./producto.dto";
 
 @Injectable()
 export class ProductoService {
-  cacheKey: string = "productos";
+  cacheKey = "productos";
 
   constructor(
     @InjectRepository(ProductoEntity)

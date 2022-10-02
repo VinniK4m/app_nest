@@ -7,7 +7,7 @@ import { Cache } from "cache-manager";
 
 @Injectable()
 export class PremioMichelinService {
-    cacheKey: string = "premios";
+    cacheKey = "premios";
 
     constructor(
         @InjectRepository(PremioMichelinEntity)
