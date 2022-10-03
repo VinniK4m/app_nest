@@ -1,6 +1,19 @@
-export class RestauranteDTO {
+/* eslint-disable prettier/prettier */
+import { IsNotEmpty, IsString } from 'class-validator';
+import {Field, InputType} from "@nestjs/graphql";
+
+@InputType()
+export class RestauranteDto {
     readonly codigo: number;
+
+    @IsString()
+    @IsNotEmpty()
+    @Field()
     readonly nombre: string;
-    readonly nombreCiudad: String;
+
+    @IsString()
+    @IsNotEmpty()
+    @Field()
+    readonly nombreCiudad: string;
 
 }

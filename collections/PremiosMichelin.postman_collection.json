@@ -1,0 +1,866 @@
+{
+	"info": {
+		"_postman_id": "3f757e3a-1d17-40cd-a70b-6b3f6f664022",
+		"name": "PremiosMichelin",
+		"description": "Documentación para el recurso de premios michelin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5687446"
+	},
+	"item": [
+		{
+			"name": "Agregar un premio a restaurante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/restaurantes/{{restauranteId}}/premiosMichelin/{{premioId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"restaurantes",
+						"{{restauranteId}}",
+						"premiosMichelin",
+						"{{premioId}}"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo premio michelin. El API retorna el recurso creado con el ID asignado"
+			},
+			"response": [
+				{
+					"name": "Agregar un premio a restaurante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurante/{{restauranteId}}/premiosMichelin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurante",
+								"{{restauranteId}}",
+								"premiosMichelin"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"codigo\": 100020,\n  \"nombre\": \"El cielo\",\n  \"nombreCiudad\": \"Bogotá\",\n  \"pais\": \"Colombia\",\n  \"premiosMichelin\":[\n    {\n        \"codigo\": 345,\n        \"fechaConsecución\": \"1997-01-27\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar un premio a restaurante no valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"Premio, no encontrado, debe agregarlo antes\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/restaurantes/5/premiosMichelin/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"restaurantes",
+						"5",
+						"premiosMichelin",
+						"1"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo premio michelin. El API retorna el recurso creado con el ID asignado"
+			},
+			"response": [
+				{
+					"name": "Agregar un premio a restaurante no valido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurante/{{restauranteId}}/premiosMichelin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurante",
+								"{{restauranteId}}",
+								"premiosMichelin"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Restaurante no encontrado o identificador de restaurante invalido\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar un premio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"premio_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"fechaConsecucion\": \"2020-01-27\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo premio michelin. El API retorna el recurso creado con el ID asignado"
+			},
+			"response": [
+				{
+					"name": "Agregar un premio a restaurante no valido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurante/{{restauranteId}}/premiosMichelin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurante",
+								"{{restauranteId}}",
+								"premiosMichelin"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Restaurante no encontrado o identificador de restaurante invalido\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los premios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Numero de premios > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los premios",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n   {\r\n       \"codigo\": 123,\r\n       \"fechaConsecución\":\"1997-01-27\",\r\n       \"restaurante\":{\r\n           \"codigo\": 12,\r\n           \"nombre\": \"El Cielo\",\r\n           \"ciudad\":\" Bogota\",\r\n           \"pais\": \"Colombia\"\r\n       }\r\n   },\r\n     {\r\n       \"codigo\": 1234,\r\n       \"fechaConsecución\":\"1997-01-27\",\r\n       \"restaurante\":{\r\n           \"codigo\": 13,\r\n           \"nombre\": \"La bonga del Sinu\",\r\n           \"ciudad\":\" Monteria\",\r\n           \"pais\": \"Colombia\"\r\n       }\r\n   }\r\n\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los premios de un restaurante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/restaurantes/{{restauranteId}}/premiosMichelin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"restaurantes",
+						"{{restauranteId}}",
+						"premiosMichelin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los premios de un restaurante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurante/{{restauranteId}}/premiosMichelin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurante",
+								"{{restauranteId}}",
+								"premiosMichelin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"codigo\": 123,\r\n    \"nombre\": \"El Cielo\",\r\n    \"ciudad\":\" Bogota\",\r\n    \"pais\": \"Colombia\",\r\n    \"premiosMichelin\":[\r\n        {\r\n            \"codigo\": 1,\r\n            \"fechaConsecución\":\"1997-01-27\"   \r\n        },\r\n            {\r\n            \"codigo\": 2,\r\n            \"fechaConsecución\":\"1998-01-27\"\r\n        }\r\n    ]\r\n    }"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los premios de un restaurante invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"Premios michelin no encontrados, restaurante invalido\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/restaurantes/0/premiosMichelin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"restaurantes",
+						"0",
+						"premiosMichelin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los premios de un restaurante invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurante/00000000-0000-0000/premiosMichelin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurante",
+								"00000000-0000-0000",
+								"premiosMichelin"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 404,\r\n    \"message\": \"Premios michelin no encontrados, restaurante invalido\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un premio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin/{{premioId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin",
+						"{{premioId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un premio",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin/{{premioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin",
+								"{{premioId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "   {\r\n       \"codigo\": 12312,\r\n       \"fechaConsecución\":\"1997-01-27\",\r\n       \"restaurante\":{\r\n           \"codigo\": 123333,\r\n           \"nombre\": \"El Cielo\",\r\n           \"ciudad\":\" Bogota\",\r\n           \"pais\": \"Colombia\"\r\n       }\r\n   }"
+				}
+			]
+		},
+		{
+			"name": "Obtener premio invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El premio michelin con este codigo no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener premio invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El premio michelin con este codigo no fue encontrado\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un premio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"fechaConsecucion\": \"2000-01-27\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin/{{premioId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin",
+						"{{premioId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un premio",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"fechaConsecución\": \"1997-01-28\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin/{{premioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin",
+								"{{premioId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"codigo\": 100020,\n  \"nombre\": \"El cielo\",\n  \"nombreCiudad\": \"Bogotá\",\n  \"pais\": \"Colombia\",\n  \"premiosMichelin\":[\n    {\n        \"codigo\": 344534,\n        \"fechaConsecución\": \"1997-01-28\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar premio invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El premio michelin con este codigo no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"fechaConsecucion\": \"2000-01-27\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar premio invalido",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Smithsonian national museum of natural history\",\r\n   \"description\": \"The world's most popular natural history museum is dedicated to understanding the natural world and our place in it. Delve into the fascinating story of our planet, from its fiery beginnings through billions of years of transformation, and explore life on Earth through exhibitions and activities, collection objects and research that happens in the lab and in the field. The museum is larger than 18 football fields and is home to the largest natural history collection in the world.\",\r\n   \"address\": \"10th St. & Constitution Ave. NW, Washington, DC (new address)\",\r\n   \"city\": \"Washington DC\",\r\n   \"image\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El premio michelin con este codigo no fue encontrado\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar premio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin/{{premioId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin",
+						"{{premioId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar premio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin/{{premioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin",
+								"{{premioId}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar premio invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El premio michelin con este codigo no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/premiosMichelin/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"premiosMichelin",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar premio invalido",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/premiosMichelin/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"premiosMichelin",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El premio michelin con este codigo no fue encontrado\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "premioId",
+			"value": "1"
+		}
+	]
+}

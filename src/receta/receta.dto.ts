@@ -1,9 +1,28 @@
+import { IsString, IsUrl, IsOptional } from "class-validator";
+import {Field, InputType} from "@nestjs/graphql";
+
+@InputType()
 export class RecetaDTO {
-    readonly codigo: number;
-    readonly nombre: string;
-    readonly descripcion: string;
-    readonly urlFoto: string;
-    readonly procesoPrep: string;
-    readonly urlVideo: string;
+
+  @IsString()
+  @Field()
+  readonly nombre: string;
+
+  @IsString()
+  @Field()
+  readonly descripcion: string;
+
+  @IsUrl()
+  @Field()
+  readonly urlFoto: string;
+
+  @IsString()
+  @Field()
+  readonly procesoPrep: string;
+
+  @IsUrl()
+  @IsOptional()
+  @Field()
+  readonly urlVideo: string;
 
 }

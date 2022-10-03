@@ -1,5 +1,12 @@
+import { IsNotEmpty, IsDateString } from "class-validator";
+import {Field, InputType} from "@nestjs/graphql";
+
+@InputType()
 export class PremioMichelinDTO {
-    readonly codigo: number;
-    readonly fechaConsecucion: Date;
+
+  @IsNotEmpty()
+  @IsDateString()
+  @Field()
+  readonly fechaConsecucion: Date;
 
 }

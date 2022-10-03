@@ -21,7 +21,7 @@ describe('CulturaService', () => {
 
     service = module.get<CulturaService>(CulturaService);
     repository = module.get<Repository<CulturaEntity>>(
-      getRepositoryToken(CulturaEntity),
+        getRepositoryToken(CulturaEntity),
     );
     await seedDatabase();
   });
@@ -67,6 +67,8 @@ describe('CulturaService', () => {
       codigo: Number(faker.random.numeric(2)),
       nombre: faker.name.fullName(),
       descripcion: faker.lorem.sentence(),
+      productos:[],
+      recetas:[]
     };
 
     const newCulture: CulturaEntity = await service.create(cultura);
@@ -86,8 +88,8 @@ describe('CulturaService', () => {
     culture.descripcion = 'Nueva descripcion de una cultura';
 
     const updatedCulture: CulturaEntity = await service.update(
-      culture.codigo,
-      culture,
+        culture.codigo,
+        culture,
     );
     expect(updatedCulture).not.toBeNull();
 
