@@ -7,7 +7,7 @@ import { CulturaEntity } from "./cultura.entity";
 
 @Injectable()
 export class CulturaService {
-  cacheKey: string = "culturas";
+  cacheKey = "culturas";
 
   constructor(
     @InjectRepository(CulturaEntity)

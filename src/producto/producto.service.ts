@@ -9,7 +9,7 @@ import {ProductoDTO} from "./producto.dto";
 
 @Injectable()
 export class ProductoService {
-  cacheKey: string = "productos";
+  cacheKey = "productos";
 
   constructor(
     @InjectRepository(ProductoEntity)
