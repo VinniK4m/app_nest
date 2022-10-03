@@ -9,6 +9,9 @@ import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.
 import {Roles} from "../role/roles.decorator";
 import {RoleType} from "../role/role";
 import {ProductoDTO} from "./producto.dto";
+import {CulturaEntity} from "../cultura/cultura.entity";
+import {plainToInstance} from "class-transformer";
+import {ProductoEntity} from "./producto.entity";
 
 
 @Controller('productos')
@@ -35,7 +38,8 @@ export class ProductoController {
     @Roles(RoleType.USERPOST, RoleType.ADMIN)
     @HttpCode(200)
     async create(@Body() productoDTO: ProductoDTO) {
-        return await this.productoService.create(productoDTO);
+        const productoEntity: ProductoEntity = plainToInstance(ProductoEntity, productoDTO);
+        return await this.productoService.create(productoEntity);
     }
 
 
@@ -43,7 +47,8 @@ export class ProductoController {
     @Put(':productoId')
     @Roles(RoleType.USERPOST, RoleType.ADMIN)
     async update(@Param('productoId') productoId: number, @Body() productoDTO: ProductoDTO) {
-        return await this.productoService.update(productoId, productoDTO);
+        const productoEntity: ProductoEntity = plainToInstance(ProductoEntity, productoDTO);
+        return await this.productoService.update(productoId, productoEntity);
     }
 
 

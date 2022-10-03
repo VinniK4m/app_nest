@@ -8,6 +8,9 @@ import {Roles} from "../role/roles.decorator";
 import {RoleType} from "../role/role";
 import {BusinessErrorsInterceptor} from "../shared/interceptors/business-errors.interceptor";
 import {CategoriaDTO} from "./categoria.dto";
+import {ProductoEntity} from "../producto/producto.entity";
+import {plainToInstance} from "class-transformer";
+import {CategoriaEntity} from "./categoria.entity";
 
 
 @Controller('categorias')
@@ -32,7 +35,8 @@ export class CategoriaController {
     @HttpCode(200)
     @Roles(RoleType.USERPOST, RoleType.ADMIN)
     async create(@Body() categoriaDTO: CategoriaDTO) {
-        return await this.categoriaService.create(categoriaDTO);
+        const categoriaEntity: CategoriaEntity = plainToInstance(CategoriaEntity, categoriaDTO);
+        return await this.categoriaService.create(categoriaEntity);
     }
 
 
@@ -40,7 +44,8 @@ export class CategoriaController {
     @Put(':categoriaId')
     @Roles(RoleType.USERPOST, RoleType.ADMIN)
     async update(@Param('categoriaId') categoriaId: number, @Body() categoriaDTO: CategoriaDTO) {
-        return await this.categoriaService.update(categoriaId, categoriaDTO);
+        const categoriaEntity: CategoriaEntity = plainToInstance(CategoriaEntity, categoriaDTO);
+        return await this.categoriaService.update(categoriaId, categoriaEntity);
     }
 
 

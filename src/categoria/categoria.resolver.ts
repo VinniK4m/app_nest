@@ -30,7 +30,7 @@ categoria(@Args('codigo') codigo: number): Promise<CategoriaEntity> {
     @Mutation(() => CategoriaEntity)
     updateCategoria(@Args('codigo') codigo: number, @Args('categoria') categoriaDto: CategoriaDTO): Promise<CategoriaDTO> {
         const categoria = plainToInstance(CategoriaEntity, categoriaDto);
-        return this.categoriaService.update(codigo, categoriaDto);
+        return this.categoriaService.update(codigo, categoria);
     }
 
     @Mutation(() => String)
