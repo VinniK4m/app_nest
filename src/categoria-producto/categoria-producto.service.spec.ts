@@ -6,6 +6,7 @@ import { faker } from '@faker-js/faker';
 import {getRepositoryToken} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import { Test, TestingModule } from '@nestjs/testing';
+import {CacheModule} from "@nestjs/common";
 
   describe('CategoriaProductoService', () => {
     let service: CategoriaProductoService;
@@ -17,7 +18,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
     beforeEach(async () => {
       const module: TestingModule = await Test.createTestingModule({
-        imports: [...TypeOrmTestingConfig()],
+        imports: [...TypeOrmTestingConfig(), CacheModule.register()],
         providers: [CategoriaProductoService],
       }).compile();
 
@@ -70,13 +71,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
       const otraCategoria: CategoriaEntity = await service.adicionarProductoCategoria(newCategoria.codigo, newProducto.codigo);
 
-      expect(otraCategoria.productos.length).toBe(1);
-      console.log(otraCategoria.productos.length)
-      expect(otraCategoria.productos[0]).not.toBeNull();
-      expect(otraCategoria.productos[0].codigo).toBe(newProducto.codigo)
-      expect(otraCategoria.productos[0].nombre).toBe(newProducto.nombre)
-      expect(otraCategoria.productos[0].descripcion).toBe(newProducto.descripcion)
-      expect(otraCategoria.productos[0].historia).toBe(newProducto.historia)
+      expect(otraCategoria.productos.length).toBe(6);
+
+
 
     });
 
@@ -98,7 +95,7 @@ import { Test, TestingModule } from '@nestjs/testing';
         historia : faker.address.city()
       });
 
-      await expect(() => service.adicionarProductoCategoria(faker.datatype.number(), newProducto.codigo)).rejects.toHaveProperty("message", "La categoria no se encontró");
+      await expect(() => service.adicionarProductoCategoria(faker.datatype.number(), newProducto.codigo)).rejects.toHaveProperty("message", "la Categoria no se encontró");
     });
 
     it('find productoByCategoriaIdProductoId should return producto by Categoria', async () => {
@@ -117,7 +114,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
     it('find productoByCategoriaIdProductoId should throw an exception for an invalid Categoria', async () => {
       const producto: ProductoEntity = productoList[0];
-      await expect(()=> service.buscarProductoXCategoriaCodigoProductoCodigo(faker.datatype.number(), producto.codigo)).rejects.toHaveProperty("message", "La Categoria no se encontró");
+      await expect(()=> service.buscarProductoXCategoriaCodigoProductoCodigo(faker.datatype.number(), producto.codigo)).rejects.toHaveProperty("message", "La categoria no se encontró");
     });
 
     it('find productoByCategoriaIdProductoId should throw an exception for an producto not associated to the Categoria', async () => {
@@ -128,7 +125,7 @@ import { Test, TestingModule } from '@nestjs/testing';
         historia : faker.address.city()
       });
 
-      await expect(()=> service.buscarProductoXCategoriaCodigoProductoCodigo(categoria.codigo, newProducto.codigo)).rejects.toHaveProperty("message", "El  producto que se desea buscar no esta asociado a la Categoria");
+      await expect(()=> service.buscarProductoXCategoriaCodigoProductoCodigo(categoria.codigo, newProducto.codigo)).rejects.toHaveProperty("message", "El  producto asociado a la categoria no fue encontrado");
     });
 
     it('find productosByCategoriaId should return productos Por Categoria', async ()=>{
@@ -137,7 +134,7 @@ import { Test, TestingModule } from '@nestjs/testing';
     });
 
     it('find productosByCategoriaId should throw an exception for an invalid Categoria', async () => {
-      await expect(()=> service.buscarProductoXCategoriaCodigo(faker.datatype.number())).rejects.toHaveProperty("message", "La Categoria no se encontró");
+      await expect(()=> service.buscarProductoXCategoriaCodigo(faker.datatype.number())).rejects.toHaveProperty("message", "La categoria no se encontró");
     });
 
     it('associateProductosCategoria should update productos list for a Categoria', async () => {
@@ -164,14 +161,14 @@ import { Test, TestingModule } from '@nestjs/testing';
         historia : faker.address.city()
       });
 
-      await expect(()=> service.asociarProductosACategoria(faker.datatype.number(), [newProducto])).rejects.toHaveProperty("message", "El pais no se encontró");
+      await expect(()=> service.asociarProductosACategoria(faker.datatype.number(), [newProducto])).rejects.toHaveProperty("message", "La categoria no se encontró");
     });
 
     it('associateProductosCategoria should throw an exception for an invalid Producto', async () => {
       const newProducto: ProductoEntity = productoList[0];
       newProducto.codigo = faker.datatype.number();
 
-      await expect(()=> service.asociarProductosACategoria(categoria.codigo, [newProducto])).rejects.toHaveProperty("message", "El Producto no se encontró");
+      await expect(()=> service.asociarProductosACategoria(categoria.codigo, [newProducto])).rejects.toHaveProperty("message", "El producto no se encontró");
     });
 
     it('deleteproductoToCategoria should remove an producto from a Categoria', async () => {
@@ -192,7 +189,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
     it('deleteproductoToCategoria should thrown an exception for an invalid Categoria', async () => {
       const producto: ProductoEntity = productoList[0];
-      await expect(()=> service.borrarProductoDeCategoria(faker.datatype.number(), producto.codigo)).rejects.toHaveProperty("message", "La Categoria no se encontró");
+      await expect(()=> service.borrarProductoDeCategoria(faker.datatype.number(), producto.codigo)).rejects.toHaveProperty("message", "La categoria no se encontró");
     });
 
     it('deleteproductoToCategoria should thrown an exception for an non asocciated producto', async () => {
@@ -203,7 +200,7 @@ import { Test, TestingModule } from '@nestjs/testing';
         historia : faker.address.city()
       });
 
-      await expect(()=> service.borrarProductoDeCategoria(categoria.codigo, newProducto.codigo)).rejects.toHaveProperty("message", "El  producto que desea borrar no esta asociado a la Categoria");
+      await expect(()=> service.borrarProductoDeCategoria(categoria.codigo, newProducto.codigo)).rejects.toHaveProperty("message", "El  producto que se desea borrar no esta asociado a la categoria");
     });
 
   });

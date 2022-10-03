@@ -41,23 +41,23 @@ export class ProductoService {
     return producto;
   }
 
-    async create(productoDTO: ProductoDTO): Promise<ProductoDTO> {
+    async create(productoEntity: ProductoEntity): Promise<ProductoEntity> {
         const producto = new ProductoEntity();
-        producto.nombre = productoDTO.nombre;
-        producto.historia = productoDTO.historia;
-        producto.descripcion = productoDTO.descripcion;
+        producto.nombre = productoEntity.nombre;
+        producto.historia = productoEntity.historia;
+        producto.descripcion = productoEntity.descripcion;
         return await this.productoRepository.save(producto);
 
     }
 
-    async update(codigo: number, productoDTO: ProductoDTO): Promise<ProductoDTO> {
+    async update(codigo: number, productoEntity: ProductoEntity): Promise<ProductoEntity> {
         const persistedProducto: ProductoEntity = await this.productoRepository.findOne({where:{codigo}});
         if (!persistedProducto)
             throw new BusinessLogicException("El producto con este identificador no fue encontrado", BusinessError.NOT_FOUND);
 
-        persistedProducto.nombre = productoDTO.nombre;
-        persistedProducto.historia = productoDTO.historia;
-        persistedProducto.descripcion = productoDTO.descripcion;
+        persistedProducto.nombre = productoEntity.nombre;
+        persistedProducto.historia = productoEntity.historia;
+        persistedProducto.descripcion = productoEntity.descripcion;
         return await this.productoRepository.save(persistedProducto);
     }
 

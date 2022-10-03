@@ -6,6 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { PremioMichelinEntity } from '../premio-michelin/premio-michelin.entity';
 import { RestauranteEntity } from '../restaurante/restaurante.entity';
+import {CacheModule} from "@nestjs/common";
 
 
 describe('RestaurantePremioService', () => {
@@ -18,7 +19,7 @@ describe('RestaurantePremioService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TypeOrmTestingConfig()],
+      imports: [...TypeOrmTestingConfig(), CacheModule.register()],
       providers: [RestaurantePremioService],
     }).compile();
 

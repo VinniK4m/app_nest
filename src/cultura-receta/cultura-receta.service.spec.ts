@@ -6,6 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { RecetaEntity } from '../receta/receta.entity';
 import { CulturaEntity } from '../cultura/cultura.entity';
+import {CacheModule} from "@nestjs/common";
 
 
 describe('CulturaRecetaService', () => {
@@ -18,7 +19,7 @@ describe('CulturaRecetaService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TypeOrmTestingConfig()],
+      imports: [...TypeOrmTestingConfig(), CacheModule.register()],
       providers: [CulturaRecetaService],
     }).compile();
 

@@ -5,9 +5,13 @@ import { Repository } from 'typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { CategoriaEntity } from './categoria.entity';
 import { CategoriaService } from './categoria.service';
-
+import {CACHE_MANAGER, CacheModule, Inject, Injectable} from "@nestjs/common";
+import { Cache } from "cache-manager";
 import { faker } from '@faker-js/faker';
 import {ProductoEntity} from "../producto/producto.entity";
+import {CategoriaDTO} from "./categoria.dto";
+import {PaisEntity} from "../pais/pais.entity";
+import {plainToInstance} from "class-transformer";
 
 describe('CategoriaService', () => {
   let service: CategoriaService;
@@ -18,7 +22,7 @@ describe('CategoriaService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TypeOrmTestingConfig()],
+      imports: [...TypeOrmTestingConfig(), CacheModule.register()],
       providers: [CategoriaService],
     }).compile();
 
@@ -64,7 +68,7 @@ describe('CategoriaService', () => {
     const categoria: CategoriaEntity = {
       codigo: 0,
       nombre: faker.company.name(),
-      productos: ProductoEntity[0]
+      productos: []
 
     }
 
@@ -79,6 +83,7 @@ describe('CategoriaService', () => {
   it('update deberia modificar una nueva categoria', async () => {
     const categoria: CategoriaEntity = categoriasList[0];
     categoria.nombre = "New nombre";
+
 
 
     const updatedCategoria: CategoriaEntity = await service.update(categoria.codigo, categoria);
