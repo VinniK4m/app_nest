@@ -24,6 +24,7 @@ import { RestaurantePremioModule } from "./restaurante-premio/restaurante-premio
 import { CulturaRecetaModule } from "./cultura-receta/cultura-receta.module";
 import { PaisRestauranteModule } from "./pais-restaurante/pais-restaurante.module";
 import { CategoriaProductoModule } from "./categoria-producto/categoria-producto.module";
+import { CulturaProductoModule } from './cultura-producto/cultura-producto.module';
 import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 
@@ -43,8 +44,8 @@ import { AuthModule } from "./auth/auth.module";
       type: "postgres",
       host: "localhost",
       port: 5432,
-      username: "root",
-      password: "root",
+      username: "postgres",
+      password: "abcd1234",
       database: "culturaGastronomica",
       entities: [RecetaEntity, PremioMichelinEntity, ProductoEntity, CategoriaEntity, CulturaEntity, PaisEntity, RestauranteEntity],
       dropSchema: true,
@@ -55,6 +56,7 @@ import { AuthModule } from "./auth/auth.module";
     CulturaRecetaModule,
     PaisRestauranteModule,
     CategoriaProductoModule,
+    CulturaProductoModule,
     UserModule,
     AuthModule,
     CacheModule.register()

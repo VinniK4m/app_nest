@@ -1,0 +1,84 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CategoriaEntity {
+  codigo: Float!
+  nombre: String!
+}
+
+type ProductoEntity {
+  codigo: Float!
+  nombre: String!
+  descripcion: String!
+  historia: String!
+  categoria: CategoriaEntity!
+}
+
+type RecetaEntity {
+  codigo: Float!
+  nombre: String!
+  descripcion: String!
+  urlFoto: String!
+  procesoPrep: String!
+  urlVideo: String!
+}
+
+type CulturaEntity {
+  codigo: Float!
+  nombre: String!
+  descripcion: String!
+}
+
+type PaisEntity {
+  codigo: Float!
+  nombre: String!
+  capital: String!
+  bandera: String!
+}
+
+type RestauranteEntity {
+  codigo: Float!
+  nombre: String!
+  nombreCiudad: String!
+  pais: PaisEntity!
+}
+
+type PremioMichelinEntity {
+  codigo: Float!
+  fechaConsecucion: DateTime!
+  restaurante: RestauranteEntity!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  culturas: [CulturaEntity!]!
+  cultura(codigo: Float!): CulturaEntity!
+  productos: [ProductoEntity!]!
+  producto(codigo: Float!): ProductoEntity!
+  categorias: [CategoriaEntity!]!
+  categoria(codigo: Float!): CategoriaEntity!
+  paises: [PaisEntity!]!
+  pais(codigo: Float!): PaisEntity!
+  restaurantes: [RestauranteEntity!]!
+  restaurante(codigo: Float!): RestauranteEntity!
+  recetas: [RecetaEntity!]!
+  receta(codigo: Float!): RecetaEntity!
+  premios: [PremioMichelinEntity!]!
+  premio(codigo: Float!): PremioMichelinEntity!
+}
+
+type Mutation {
+  createCategoria(categoria: CategoriaDTO!): CategoriaEntity!
+  updateCategoria(codigo: Float!, categoria: CategoriaDTO!): CategoriaEntity!
+  deleteCategoria(codigo: Float!): String!
+}
+
+input CategoriaDTO {
+  codigo: Float!
+  nombre: String!
+}
