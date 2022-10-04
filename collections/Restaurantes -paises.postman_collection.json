@@ -1,0 +1,1075 @@
+{
+	"info": {
+		"_postman_id": "96574cea-5e9e-4876-bccf-15d7ae6e1ecd",
+		"name": "Restaurantes -paises",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9248115"
+	},
+	"item": [
+		{
+			"name": "Adicionar restaurante a un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{{{pais_codigo}}}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{{{pais_codigo}}}}",
+						"restaurantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Adicionar restaurante a un pais",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurante"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "\r\n{\r\n    \"codigo\": 12220\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Adicionar restaurante que no existe a un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El restaurante no existe. \");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_cdigo}}/restaurantes/1001",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_cdigo}}",
+						"restaurantes",
+						"1001"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Adicionar restaurante que no existe a un pais",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/paises/{{pais_cdigo}}/restaurantes/1001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"paises",
+								"{{pais_cdigo}}",
+								"restaurantes",
+								"1001"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "\r\n{\r\n    \"codigo\": 12220\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Adicionar restaurante a un pais que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El pais no existe para adicionar restaurante\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/paises/1001/restaurantes/{{restaurante_codigo}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"1001",
+						"restaurantes",
+						"{{restaurante_codigo}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Adicionar restaurante a un pais que no existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurante"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "\r\n{\r\n    \"codigo\": 12220\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener restaurantes de un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener restaurantes de un pais",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n        {\r\n            \"codigo\":100020,\r\n            \"nombre\":\"El cielo\",\r\n            \"nombreCiudad\":\"Bogotá\"\r\n        },\r\n        {\r\n            \"codigo\":100030,\r\n            \"nombre\":\"El último\",\r\n            \"nombreCiudad\":\"Cali\"\r\n        }\r\n    ]"
+				}
+			]
+		},
+		{
+			"name": "Obtener restaurantes de un pais que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/1001/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"1001",
+						"restaurantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener restaurantes de un pais que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/paises/1001/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"paises",
+								"1001",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n        {\r\n            \"codigo\":100020,\r\n            \"nombre\":\"El cielo\",\r\n            \"nombreCiudad\":\"Bogotá\"\r\n        },\r\n        {\r\n            \"codigo\":100030,\r\n            \"nombre\":\"El último\",\r\n            \"nombreCiudad\":\"Cali\"\r\n        }\r\n    ]"
+				}
+			]
+		},
+		{
+			"name": "Obtener restaurante de un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes/{{restaurante_codigo}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes",
+						"{{restaurante_codigo}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener restaurantes de un pais",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante/{{restaurante_codigo}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurante",
+								"{{restaurante_codigo}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"codigo\":100020,\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener restaurante que no existe de un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes/{{restaurante_codigo}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes",
+						"{{restaurante_codigo}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener restaurante que no existe de un pais",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante/{{restaurante_codigo}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurante",
+								"{{restaurante_codigo}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"codigo\":100020,\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener restaurante de un pais que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/1001/restaurantes/{{restaurante_codigo}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"1001",
+						"restaurantes",
+						"{{restaurante_codigo}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener restaurante de un pais que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/1001/restaurante/{{restaurante_codigo}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"1001",
+								"restaurante",
+								"{{restaurante_codigo}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"codigo\":100020,\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar restaurantes de un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The mueso no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n        {   \"codigo\": 1,\r\n            \"nombre\":\"El cielo\",\r\n            \"nombreCiudad\":\"Bogotá\"\r\n\r\n        }\r\n]\r\n   \r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar restaurante de un pais",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"paises",
+								"{{pais_codigo}}",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 100020,\n    \"nombre\": \"El cielo\",\n    \"nombreCiudad\": \"Bogotá\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar restaurante de un pais que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El restaurante no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n        {   \r\n            \"codigo\": 2,\r\n            \"nombre\":\"El cielo\",\r\n            \"nombreCiudad\":\"Bogotá\"\r\n\r\n        }\r\n]\r\n   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar restaurante de un pais que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/paises/1001/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"paises",
+								"1001",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"codigo\":100020,\r\n    \"nombre\":\"El cielo\",\r\n    \"nombreCiudad\":\"Bogotá\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar restaurante de un pais que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El restaurante no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n        {   \r\n            \"codigo\": 2,\r\n            \"nombre\":\"El cielo\",\r\n            \"nombreCiudad\":\"Bogotá\"\r\n\r\n        }\r\n]\r\n   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/paises/1001/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"1001",
+						"restaurantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar restaurante de un pais que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante/20000002",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurante",
+								"20000002"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 404,\r\n    \"message\": \"El restaurante que actualiza no existe\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar restaurante de un pais",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante/{{restaurante_codigo}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pais",
+						"{{pais_codigo}}",
+						"restaurante",
+						"{{restaurante_codigo}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar restaurante de un pais",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pais/{{pais_codigo}}/restaurante/{{restaurante_codigo}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pais",
+								"{{pais_codigo}}",
+								"restaurante",
+								"{{restaurante_codigo}}"
+							]
+						}
+					},
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Borrar restaurante de un pais que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The museum with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes/20000002",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes",
+						"20000002"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar restaurante de un pais que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes/20000002",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"paises",
+								"{{pais_codigo}}",
+								"restaurantes",
+								"20000002"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El restaurante que borra no existe\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar restaurante que no existe de un pais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El restaurante no se encontró\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes/20000002",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"paises",
+						"{{pais_codigo}}",
+						"restaurantes",
+						"20000002"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar restaurante que no existe de un pais",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/paises/{{pais_codigo}}/restaurantes/20000002",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"paises",
+								"{{pais_codigo}}",
+								"restaurantes",
+								"20000002"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El restaurante que borra no existe\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "restaurante_codigo",
+			"value": "1"
+		},
+		{
+			"key": "pais_codigo",
+			"value": "3",
+			"type": "string"
+		}
+	]
+}
